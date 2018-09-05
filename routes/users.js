@@ -47,7 +47,7 @@ passport.use(new LocalStrategy(function(username, password, done){
 
 //Example for folder redirection
 router.get('/upload', ensureAuthenticated, function(req, res){
-	res.render('authed/upload');
+	//res.render('authed/upload');
 });
 
 //Post request used in the login form
@@ -64,7 +64,7 @@ router.get('/logout', ensureAuthenticated, function(req, res){
 });
 
 router.get('/register', function(req, res, next) {
-	res.render('register');
+	//res.render('register');
 });
 
 router.post('/register', function(req, res, next) {

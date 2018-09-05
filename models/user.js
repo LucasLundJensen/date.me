@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
-mongoose.connect('mongodb://localhost:27017/louisdrive', { useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/datingsite', { useNewUrlParser: true});
 
 var db = mongoose.connection;
 
@@ -15,6 +15,12 @@ var UserSchema = mongoose.Schema({
 		type: String
 	},
 	email: {
+		type: String
+	},
+	gender: {
+		type: String
+	},
+	preferedSex: {
 		type: String
 	},
 	profileImage: {
