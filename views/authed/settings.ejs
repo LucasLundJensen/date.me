@@ -1,0 +1,9 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+
+<form action="/user/updateProfileImage" method="POST" enctype="multipart/form-data">
+    <input type="file" name="avatar">
+    <input type="submit">
+</form>
+
+<% include ../partials/footer %>

@@ -46,9 +46,13 @@ passport.use(new LocalStrategy(function(username, password, done){
 }));
 
 //Example for folder redirection
-router.get('/user/profile', function(req, res){
+router.get('/user/profile', ensureAuthenticated, function(req, res){
 	res.render('authed/profile');
 });
+
+router.get('/user/settings', ensureAuthenticated, function(req, res, next) {
+	res.render('authed/settings');
+})
 
 //Post request used in the login form
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid username or password'}), function(req, res) {
@@ -66,6 +70,16 @@ router.get('/logout', ensureAuthenticated, function(req, res){
 router.get('/register', function(req, res, next) {
 	res.render('register');
 });
+
+
+router.post('/user/updateProfileImage', ensureAuthenticated, upload.single('avatar'), function(req, res, next){
+	console.log(res.locals);
+	console.log(res.locals.user);
+	//User.updateUserImage(res.locals.user.username, req.file);
+
+	res.location('/user/settings')
+	res.redirect('/user/settings')
+})
 
 router.post('/register', function(req, res, next) {
 	var username = req.body.username;

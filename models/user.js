@@ -48,8 +48,8 @@ module.exports.createUser = function(newUser, callback) {
 
 //Update the users image
 module.exports.updateUserImage = function(username, profileImage, callback){
-	var updateQuery = {$set:{profileImage: profileImage}};
 	var findQuery = {username: username};
+	var updateQuery = {$set:{profileImage: profileImage}};
 
 	User.update(findQuery, updateQuery, callback);
 }
