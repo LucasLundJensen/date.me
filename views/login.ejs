@@ -1,41 +1,20 @@
 <% include partials/header %>
 
-<div class="formContainer">		
-	<form action="">
-		<header>Login form</header>
-		
-		<fieldset>					
-			<section>
-				<div class="row">
-					<label>E-mail</label>
-					<div>
-						<label class="input">
-							<i class="icon-append fa fa-user"></i>
-							<input type="email" name="email">
-						</label>
-					</div>
-				</div>
-			</section>
-			
-			<section>
-				<div class="row">
-					<label>Password</label>
-					<div>
-						<label class="input">
-							<i class="icon-append fa fa-lock"></i>
-							<input type="password" name="password">
-						</label>
-						<div class="note"><a>Forgot password?</a></div>
-					</div>
-				</div>
-			</section>
-			
-		</fieldset>
-		<footer>
-			<button type="submit" class="button">Log in</button>
-			<a href="#" >Register</a>
-		</footer>
-	</form>			
-</div>
+
+<form>
+	<div class="form-group">
+		<i class="icon-append fa fa-user"></i>
+		<label for="exampleInputEmail1">Email address</label>
+		<input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+	</div>
+	<div class="form-group">
+		<i class="icon-append fa fa-lock"></i>
+		<label for="exampleInputPassword1">Password</label>
+		<input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+	<a href="register" >Register</a>
+</form>
+
 
 <% include partials/footer %>
