@@ -72,13 +72,13 @@ router.get('/register', function(req, res, next) {
 });
 
 
-router.post('/user/updateProfileImage', ensureAuthenticated, upload.single('avatar'), function(req, res, next){
-	console.log(res.locals);
-	console.log(res.locals.user);
-	//User.updateUserImage(res.locals.user.username, req.file);
-
-	res.location('/user/settings')
-	res.redirect('/user/settings')
+router.post('/user/updateProfileImage', upload.single('avatar'), function(req, res, next){
+	User.updateUserImage(req.user.username, req.file.filename, function(err, feedback){
+		if (err) {
+			throw err;
+		}
+		console.log(feedback);
+	});
 })
 
 router.post('/register', function(req, res, next) {
