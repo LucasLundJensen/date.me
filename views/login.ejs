@@ -1,20 +1,22 @@
 <% include partials/header %>
 
-
-<form method="post" action="/login">
-	<div class="form-group">
-		<i class="icon-append fa fa-user"></i>
-		<label>Username</label>
-		<input name="username" type="text" class="form-control" placeholder="Username">
+<div class="h-100 row">
+	<div class="col-md-2 offset-md-5 col-sm-1">
+	<%- messages() %>
+	<h1 class="login_title">Date.ME</h1>
+		<form method="POST" action="/login">
+			<div class="form-group">
+				<label>Username:</label>
+				<input type="text" name="username" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Password:</label>
+				<input type="password" name="password" class="form-control">
+			</div>
+			<button type="submit" class="btn btn-success w-100">Login</button>
+		</form>
 	</div>
-	<div class="form-group">
-		<i class="icon-append fa fa-lock"></i>
-		<label>Password</label>
-		<input name="password" type="password" class="form-control" placeholder="Password">
-	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
-	<a href="register" >Register</a>
-</form>
+</div>
 
 
 <% include partials/footer %>

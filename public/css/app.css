@@ -18,10 +18,13 @@ html, body {
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
-.profile_page {
-	background: #1f364d;
+/* Login page */
+.login_title {
+  text-align: center;
+  margin-bottom: 2rem; 
 }
 
+/* These are the messages that is seen when a user changes its settings / logins */
 #messages {
   margin-bottom: 20px;
   text-align: center; 
@@ -42,6 +45,7 @@ html, body {
     border-color: #f5c6cb; 
 }
 
+/* This is the navigation bar styling */
 .topbar-container {
   position: relative;
   width: 100%;
@@ -84,7 +88,7 @@ html, body {
 }
 
 .active {
-  color: yellow;
+  color: white;
   font-weight: 600; 
 }
 
@@ -115,14 +119,20 @@ html, body {
 
 /* Profile Styling */
 
-.header_container {
-  margin-bottom: 2rem;
+
+/* This is used if the user is on the profile page */
+.nav_profile_color {
 	background: #1f364d;
-	padding-top: 2rem;
+}
+
+.header_container {
+	background: #1f364d;
+	padding-top: 1.5rem;
 }
 
 #avatar_image {
-	height: 180px;
+  height: 145px;
 	border-radius: 50%;
-	border: 20px solid #1f364d;
+  box-shadow: 0 0 0 12px #1f364d;
+  margin-bottom: -0.5rem;
 }
