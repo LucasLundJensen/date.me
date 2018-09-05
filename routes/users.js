@@ -53,6 +53,10 @@ router.get('/user/settings', ensureAuthenticated, function(req, res, next) {
 	res.render('authed/settings');
 })
 
+router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
+	res.render('authed/matches');
+})
+
 //Post request used in the login form
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid username or password'}), function(req, res) {
 	req.flash('success', 'You are now logged in!');

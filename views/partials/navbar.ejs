@@ -14,6 +14,9 @@
         <a href="/user/settings" class="nav_item <% if(locals.url === '/user/settings'){%><%= 'active'%><%}%>">
           Settings
         </a>
+        <a href="/user/matches" class="nav_item <% if(locals.url === '/user/matches'){%><%= 'active'%><%}%>">
+          Matches
+        </a>
         <a href="/user/profile" class="nav_item nav_avatar_image">
           <img src="/uploads/<%= user.profileImage %>">
           <span id="username_tooltip"><%= user.username.substr(0,user.username.indexOf(' ')) %></span>
