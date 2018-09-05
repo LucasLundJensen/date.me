@@ -1,11 +1,11 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 
-<div class="container-fluid">
-	<div class="header">
+<div class="container-fluid header_container">
+	<div class="container">
 		<div class="row">
-			<div class="user-image">
-				<img src="/uploads/<%= user.profileImage %>">
+			<div class="col-sm-12">
+				<img id="avatar_image" src="/uploads/<%= user.profileImage %>">
 			</div>
 		</div>
 	</div>

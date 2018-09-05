@@ -18,6 +18,10 @@ html, body {
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
+.profile_page {
+	background: #1f364d;
+}
+
 #messages {
   margin-bottom: 20px;
   text-align: center; 
@@ -42,7 +46,6 @@ html, body {
   position: relative;
   width: 100%;
   height: auto;
-  margin-bottom: 2rem;
 }
 
 .topbar {
@@ -55,7 +58,7 @@ html, body {
   padding-bottom: 1rem; 
 }
 
-.nav-item {
+.nav_item {
   color: #9cb3c9;
   text-decoration: none;
   font-size: 1rem;
@@ -69,12 +72,12 @@ html, body {
   line-height: 34px;
 }
 
-.nav-item:hover {
+.nav_item:hover {
   color: white !important;
   text-decoration: none !important; 
 }
 
-.left-item {
+.left_item {
   flex-direction: row;
   justify-content: flex-start;
   flex-grow: 0.025; 
@@ -96,4 +99,30 @@ html, body {
 	font-size: 1.2rem;
 	flex-grow: 1;
 	line-height: 42px;
+}
+
+#username_tooltip {
+	line-height: 36px;
+	padding-left: 5px;
+}
+.nav_avatar_image img {
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  height: 32px; 
+}
+
+
+
+/* Profile Styling */
+
+.header_container {
+  margin-bottom: 2rem;
+	background: #1f364d;
+	padding-top: 2rem;
+}
+
+#avatar_image {
+	height: 180px;
+	border-radius: 50%;
+	border: 20px solid #1f364d;
 }

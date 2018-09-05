@@ -1,19 +1,24 @@
-<div class="container">
-  <div class="topbar-container">
-    <div class="topbar">
-      <a href="/" class="left-item">
-        <i id="icon" class="fas fa-heartbeat"></i>
-      </a>
-      <a href="/" id="name" class="left-item">
-        Date.ME
-      </a>
-      <a href="/" class="nav-item <% if(locals.url === '/'){%><%= 'active'%><%}%>">
-        Home
-      </a>
-      <a href="#" class="nav-item <% if(locals.url === '/community'){%><%= 'active'%><%}%>">
-        Community
-      </a>
-      
+<div class="container-fluid <%if (locals.url === '/user/profile') {%><%= 'profile_page' %><%}%>">
+  <div class="container">
+    <div class="topbar-container">
+      <div class="topbar">
+        <a href="/" class="left_item">
+          <i id="icon" class="fas fa-heartbeat"></i>
+        </a>
+        <a href="/" id="name" class="left_item">
+          Date.ME
+        </a>
+        <a href="/" class="nav_item <% if(locals.url === '/'){%><%= 'active'%><%}%>">
+          Home
+        </a>
+        <a href="#" class="nav_item <% if(locals.url === '/community'){%><%= 'active'%><%}%>">
+          Community
+        </a>
+        <a href="/user/profile" class="nav_item nav_avatar_image">
+          <img src="/uploads/<%= user.profileImage %>">
+          <span id="username_tooltip"><%= user.username %></span>
+        </a>
+      </div>
     </div>
   </div>
 </div>
