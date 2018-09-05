@@ -1,5 +1,41 @@
 <% include partials/header %>
 
-<h1>Login page</h1>
+<div class="formContainer">		
+	<form action="">
+		<header>Login form</header>
+		
+		<fieldset>					
+			<section>
+				<div class="row">
+					<label>E-mail</label>
+					<div>
+						<label class="input">
+							<i class="icon-append fa fa-user"></i>
+							<input type="email" name="email">
+						</label>
+					</div>
+				</div>
+			</section>
+			
+			<section>
+				<div class="row">
+					<label>Password</label>
+					<div>
+						<label class="input">
+							<i class="icon-append fa fa-lock"></i>
+							<input type="password" name="password">
+						</label>
+						<div class="note"><a>Forgot password?</a></div>
+					</div>
+				</div>
+			</section>
+			
+		</fieldset>
+		<footer>
+			<button type="submit" class="button">Log in</button>
+			<a href="#" >Register</a>
+		</footer>
+	</form>			
+</div>
 
 <% include partials/footer %>
