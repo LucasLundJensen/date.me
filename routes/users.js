@@ -46,8 +46,8 @@ passport.use(new LocalStrategy(function(username, password, done){
 }));
 
 //Example for folder redirection
-router.get('/temp', function(req, res){
-	res.render('authed/index');
+router.get('/user/profile', function(req, res){
+	res.render('authed/profile');
 });
 
 //Post request used in the login form

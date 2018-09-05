@@ -1,16 +1,16 @@
 <% include partials/header %>
 
 
-<form>
+<form method="post" action="/login">
 	<div class="form-group">
 		<i class="icon-append fa fa-user"></i>
-		<label for="exampleInputEmail1">Email address</label>
-		<input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+		<label>Username</label>
+		<input name="username" type="text" class="form-control" placeholder="Username">
 	</div>
 	<div class="form-group">
 		<i class="icon-append fa fa-lock"></i>
-		<label for="exampleInputPassword1">Password</label>
-		<input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		<label>Password</label>
+		<input name="password" type="password" class="form-control" placeholder="Password">
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
 	<a href="register" >Register</a>
