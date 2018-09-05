@@ -28,7 +28,16 @@ var UserSchema = mongoose.Schema({
 	},
 	accountRank: {
 		type: Number
-	}
+	},
+	age: {
+		type: String
+	},
+	city: {
+		type: String
+	},
+	postcode: {
+		type: String
+	},
 });
 
 

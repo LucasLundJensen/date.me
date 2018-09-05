@@ -84,6 +84,11 @@ router.post('/user/updateProfileImage', ensureAuthenticated, upload.single('avat
 router.post('/register', function(req, res, next) {
 	var username = req.body.username;
 	var email = req.body.email;
+	var age = req.body.age;
+	var city = req.body.city;
+	var postcode = req.body.postcode;
+	var gender = req.body.gender;
+	var preferedSex = req.body.preferedSex;
 	var password = req.body.password;
 	var confirmPassword = req.body.confirmPassword;
 	var profileimage = 'noimage.png';
@@ -109,6 +114,11 @@ router.post('/register', function(req, res, next) {
 		var newUser = new User({
 			username: username,
 			email: email,
+			age: age,
+			city: city,
+			postcode: postcode,
+			gender: gender,
+			preferedSex: preferedSex,
 			password: password,
 			profileImage: profileimage,
 			accountRank: accountRank
