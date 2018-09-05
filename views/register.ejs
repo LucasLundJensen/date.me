@@ -1,0 +1,40 @@
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="user-form-box">
+			<h3>Register</h3>
+
+			<% if(locals.errors) { %>
+				<% errors.forEach(function(error) { %>
+					<div class="alert alert-danger"><%= error.msg %></div>
+				<% }) ;%>
+			<% } %>
+
+			<div class="user-form">
+				<form method="POST" action="register">
+					<div class="form-group">
+						<label>Username</label>
+						<input type="text" class="form-control" name="username" placeholder="Enter username...">
+					</div>
+					<div class="form-group">
+						<label>Email address</label>
+						<input type="email" class="form-control" name="email" placeholder="Enter email...">
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<input type="password" class="form-control" name="password" placeholder="Enter password...">
+					</div>
+					<div class="form-group">
+						<label>Confirm password</label>
+						<input type="password" class="form-control" name="confirmPassword" placeholder="Enter password again...">
+					</div>
+					<div class="form-group d-flex btn-label-inline">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<label class="mt-2">Already have an account? <a href="users/login">Click here!</a></label>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+

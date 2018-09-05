@@ -13,6 +13,7 @@ var db = mongoose.connection;
 var app = express();
 
 var mainRoute = require('./routes/index');
+var usersRoute = require('./routes/users');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.set("view engine", "ejs");
@@ -59,6 +60,7 @@ app.get('*', function(req, res, next) {
 });
 
 app.use('/', mainRoute);
+app.use('/', usersRoute);
 
 app.listen(3000, function(){
     console.log("Listening to port 3000...");
