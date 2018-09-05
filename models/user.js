@@ -38,6 +38,9 @@ var UserSchema = mongoose.Schema({
 	postcode: {
 		type: String
 	},
+	joinDate: {
+		type: String
+	}
 });
 
 

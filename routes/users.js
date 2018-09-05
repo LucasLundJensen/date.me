@@ -45,7 +45,6 @@ passport.use(new LocalStrategy(function(username, password, done){
 	});
 }));
 
-//Example for folder redirection
 router.get('/user/profile', ensureAuthenticated, function(req, res){
 	res.render('authed/profile');
 });
