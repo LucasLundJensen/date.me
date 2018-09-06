@@ -50,11 +50,20 @@ router.get('/user/profile', ensureAuthenticated, function(req, res){
 });
 
 router.get('/user/settings', ensureAuthenticated, function(req, res, next) {
+	res.redirect('/user/settings/profile')
+})
+
+router.get('/user/settings/profile', ensureAuthenticated, function(req, res, next) {
+	res.render('authed/settings');
+})
+
+router.get('/user/settings/security', ensureAuthenticated, function(req, res, next) {
 	res.render('authed/settings');
 })
 
 router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 	User.find({}, function(err, users){
+<<<<<<< HEAD
 		if(err){
 			console.log(err);
 		} else {
@@ -83,6 +92,17 @@ function bestMatch(num, users) {
    return user;
 }
 
+=======
+        if(err){
+          console.log(err);
+        } else {
+            res.render('authed/matches', users);
+            console.log(users);
+        }
+    })
+	// res.render('authed/matches');
+})
+>>>>>>> 9cc5a810404db600062043930d27145000699acf
 
 //Post request used in the login form
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid username or password'}), function(req, res) {
@@ -108,6 +128,8 @@ router.post('/user/updateProfileImage', upload.single('avatar'), function(req, r
 			throw err;
 		}
 		console.log(feedback);
+		res.location('/user/settings/profile');
+		res.redirect('/user/settings/profile');
 	});
 })
 
