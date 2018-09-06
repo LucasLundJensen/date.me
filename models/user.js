@@ -89,6 +89,6 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 
 //Delete user by userid
 module.exports.deleteUserByID = function(userid, callback) {
-	var query = {"_id": 'ObjectId("' + userid + '"'}
+	var query = {"_id": userid}
 	User.deleteOne(query, callback);
 }
