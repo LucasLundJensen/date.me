@@ -67,7 +67,8 @@ router.post('/user/settings/security/DeleteAccount', ensureAuthenticated, functi
 			throw err;
 		}
 		console.log(feedback);
-		console.log('Account deleted');
+
+		req.flash('success', 'Account has been deleted');
 		res.location('/');
 		res.redirect('/');
 	});
@@ -128,6 +129,9 @@ router.post('/user/updateProfileImage', upload.single('avatar'), function(req, r
 			throw err;
 		}
 		console.log(feedback);
+
+		req.flash('success', 'Profile picture has been updated!')
+
 		res.location('/user/settings/profile');
 		res.redirect('/user/settings/profile');
 	});
