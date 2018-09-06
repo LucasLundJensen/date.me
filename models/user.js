@@ -86,3 +86,9 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 		callback(null, isMatch);
 	});
 }
+
+//Delete user by userid
+module.exports.deleteUserByID = function(userid, callback) {
+	var query = {"_id": 'ObjectId("' + userid + '"'}
+	User.deleteOne(query, callback);
+}
