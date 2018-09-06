@@ -54,7 +54,19 @@ router.get('/user/settings', ensureAuthenticated, function(req, res, next) {
 })
 
 router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
-	res.render('authed/matches');
+	User.find({}, function(err, users){
+        if(err){
+          console.log(err);
+        } else{
+            res.render('authed/matches', users);
+            console.log(users);
+
+
+
+            for
+        }
+    })
+	// res.render('authed/matches');
 })
 
 //Post request used in the login form
