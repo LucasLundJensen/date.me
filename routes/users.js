@@ -55,19 +55,34 @@ router.get('/user/settings', ensureAuthenticated, function(req, res, next) {
 
 router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 	User.find({}, function(err, users){
-        if(err){
-          console.log(err);
-        } else{
-            res.render('authed/matches', users);
-            console.log(users);
+		if(err){
+			console.log(err);
+		} else {
+			var matches; 
 
-
-
-            for
-        }
-    })
+			var match = bestMatch(req.user.age, users)
+			console.log(match);
+			res.render('authed/matches', {match: match});
+		}
+	});
 	// res.render('authed/matches');
 })
+
+
+
+function bestMatch(num, users) {
+   var closest = null;
+   var user = null;
+	for (var i = 0; i < users.length; i++) {
+		if (closest === null || (num - closest) > (users[i].age - num) && users[i].age != num) {
+			closest = users[i].age;
+			user = users[i];
+		}
+		console.log("thse are alle ages" + users[i].age);
+	}
+   return user;
+}
+
 
 //Post request used in the login form
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid username or password'}), function(req, res) {
