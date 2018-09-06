@@ -50,6 +50,14 @@ router.get('/user/profile', ensureAuthenticated, function(req, res){
 });
 
 router.get('/user/settings', ensureAuthenticated, function(req, res, next) {
+	res.redirect('/user/settings/profile')
+})
+
+router.get('/user/settings/profile', ensureAuthenticated, function(req, res, next) {
+	res.render('authed/settings');
+})
+
+router.get('/user/settings/security', ensureAuthenticated, function(req, res, next) {
 	res.render('authed/settings');
 })
 
@@ -57,13 +65,9 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 	User.find({}, function(err, users){
         if(err){
           console.log(err);
-        } else{
+        } else {
             res.render('authed/matches', users);
             console.log(users);
-
-
-
-            for
         }
     })
 	// res.render('authed/matches');
@@ -93,6 +97,8 @@ router.post('/user/updateProfileImage', upload.single('avatar'), function(req, r
 			throw err;
 		}
 		console.log(feedback);
+		res.location('/user/settings/profile');
+		res.redirect('/user/settings/profile');
 	});
 })
 

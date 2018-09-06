@@ -1,0 +1,38 @@
+.inputDnD .form-control-file {
+    position: relative;
+    width: 100%;
+    height: 2rem;
+    outline: none;
+    visibility: hidden;
+    cursor: pointer;
+
+  }
+  .inputDnD .form-control-file:before {
+    content: attr(data-title);
+    color: #9cb3c9;
+    position: absolute;
+    width: 100%;
+    height: 4rem;
+    line-height: 3.5rem;
+    opacity: 1;
+    visibility: visible;
+    text-align: center;
+    border: 0.25em solid #9cb3c9;
+    overflow: hidden;
+    -webkit-transition: border 0.2s ease, color 0.2s ease;
+    -moz-transition: border 0.2s ease, color 0.2s ease;
+    -o-transition: border 0.2s ease, color 0.2s ease;
+    transition: border 0.2s ease, color 0.2s ease;
+  }
+  .inputDnD .form-control-file:hover:before {
+    border: 0.25em solid white;
+    color: white;
+    -webkit-transition: border 0.2s ease, color 0.2s ease;
+    -moz-transition: border 0.2s ease, color 0.2s ease;
+    -o-transition: border 0.2s ease, color 0.2s ease;
+    transition: border 0.2s ease, color 0.2s ease;
+  }
+
+  #submit_button {
+      margin-top: 1.5rem;
+  }

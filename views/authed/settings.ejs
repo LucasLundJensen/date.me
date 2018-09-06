@@ -1,13 +1,46 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 
-<div class="col-sm-3">
-    
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul>
+                <li>
+                    <a href="/user/settings/profile">Profile</a>
+                </li>
+                <li>
+                    <a href="/user/settings/security">Security</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9">
+            <% if(locals.url === "/user/settings/profile") {%>
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <h5>Update Profile Image</h5>
+                        <div class="updateImage">
+                            <form action="/user/updateProfileImage" method="POST" enctype="multipart/form-data">
+                                <div class="form-group inputDnD">
+                                    <label class="sr-only" for="inputFile">File Upload</label>
+                                    <input type="file" name="avatar" class="form-control-file text-primary font-weight-bold" id="inputFile" accept="image/*" onchange="readUrl(this)" data-title="Drag and drop a file">
+                                </div>
+                                <button type="submit" id="submit_button" class="btn btn-success w-100">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            <%} else if (locals.url === "/user/settings/security") {%>
+
+                <h1>Security settings</h1>
+
+            <%}%>
+        </div>
+    </div>
 </div>
 
-<form action="/user/updateProfileImage" method="POST" enctype="multipart/form-data">
-    <input type="file" name="avatar">
-    <input type="submit">
-</form>
-
+<% if (locals.url === "/user/settings/profile") { %>
+<script src="../js/settings.js"></script>
+<% } %>
 <% include ../partials/footer %>
