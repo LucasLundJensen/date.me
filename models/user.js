@@ -75,6 +75,14 @@ module.exports.updateUserImage = function(username, profileImage, callback){
 	User.update(findQuery, updateQuery, callback);
 }
 
+//Update the users Standards
+module.exports.updateUserStandards = function(username, minimumAge, maximumAge, distance, callback){
+	var findQuery = {username: username};
+	var updateQuery = {$set:{minimumAge: minimumAge, maximumAge: maximumAge, distance: distance}};
+
+	User.update(findQuery, updateQuery, callback);
+}
+
 
 //Get user by id
 module.exports.getUserById = function(id, callback){

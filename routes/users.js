@@ -61,6 +61,11 @@ router.get('/user/settings/security', ensureAuthenticated, function(req, res, ne
 	res.render('authed/settings');
 })
 
+router.get('/user/editStandards', ensureAuthenticated, function(req, res, next) {
+	res.render('authed/editStandards');
+})
+
+
 router.post('/user/settings/security/DeleteAccount', ensureAuthenticated, function(req, res) {
 	User.deleteUserByID(req.user._id, function(err, feedback){
 		if (err) {
@@ -136,6 +141,20 @@ router.post('/user/updateProfileImage', upload.single('avatar'), function(req, r
 	});
 })
 
+router.post('/user/editStandards', function(req, res, next){
+	User.updateUserStandards(req.user.username, req.body.minimumAge, req.body.maximumAge, req.body.distance, function(err, feedback){
+		if (err) {
+			throw err;
+		}
+		console.log(feedback);
+
+		req.flash('success', 'Your standards has been changed!')
+
+		res.location('/user/matches');
+		res.redirect('/user/matches');
+	});
+})
+
 router.post('/register', function(req, res, next) {
 	var username = req.body.username;
 	var email = req.body.email;
@@ -198,6 +217,8 @@ router.post('/register', function(req, res, next) {
 		res.redirect('/');
 	}
 });
+
+
 
 function ensureAuthenticated(req, res, next){
 	if (req.isAuthenticated()) {

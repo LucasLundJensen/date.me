@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="user-form-box">
+			<h3>Edit Standars</h3>
+
+			<% if(locals.errors) { %>
+				<% errors.forEach(function(error) { %>
+					<div class="alert alert-danger"><%= error.msg %></div>
+				<% }) ;%>
+			<% } %>
+
+			<div class="user-form">
+				<form method="POST" action="editStandards">
+					<div class="form-group">
+						<label>minimum age</label>
+						<input type="text" class="form-control" name="minimumAge" placeholder="Enter minimum age...">
+					</div>
+					<div class="form-group">
+						<label>Maximum age</label>
+						<input type="text" class="form-control" name="maximumAge" placeholder="Enter maximum age...">
+					</div>
+
+					<div class="form-group">
+						<label for="sel1">distance</label>
+						<select class="form-control" id="sel1" name="distance">
+							<option value="selectDistance">Select Distance</option>
+							<option value="close">Closest</option>
+							<option value="middle">Not too long</option>
+							<option value="all">All</option>
+						</select>
+					</div>
+
+					<div class="form-group d-flex btn-label-inline">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<% include ../partials/footer %>
