@@ -63,6 +63,36 @@ router.get('/user/settings/security', ensureAuthenticated, function(req, res, ne
 
 router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 	User.find({}, function(err, users){
+<<<<<<< HEAD
+		if(err){
+			console.log(err);
+		} else {
+			var matches; 
+
+			var match = bestMatch(req.user.age, users)
+			console.log(match);
+			res.render('authed/matches', {match: match});
+		}
+	});
+	// res.render('authed/matches');
+})
+
+
+
+function bestMatch(num, users) {
+   var closest = null;
+   var user = null;
+	for (var i = 0; i < users.length; i++) {
+		if (closest === null || (num - closest) > (users[i].age - num) && users[i].age != num) {
+			closest = users[i].age;
+			user = users[i];
+		}
+		console.log("thse are alle ages" + users[i].age);
+	}
+   return user;
+}
+
+=======
         if(err){
           console.log(err);
         } else {
@@ -72,6 +102,7 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
     })
 	// res.render('authed/matches');
 })
+>>>>>>> 9cc5a810404db600062043930d27145000699acf
 
 //Post request used in the login form
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid username or password'}), function(req, res) {
