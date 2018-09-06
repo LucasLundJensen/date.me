@@ -82,25 +82,24 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 		} else {
 			var matches;
 
-			var match = bestMatch(req.user.age, users)
-			console.log(match);
+			var match = bestMatchByAge(req.user.age, users, req.user)
 			res.render('authed/matches', {match: match});
+			console.log(match);
 		}
 	});
-	// res.render('authed/matches');
 })
 
 
 
-function bestMatch(num, users) {
+function bestMatchByAge(num, users, currentUser) {
    var closest = null;
    var user = null;
 	for (var i = 0; i < users.length; i++) {
-		if (closest === null || (num - closest) > (users[i].age - num) && users[i].age != num) {
+		if (closest === null || (num - closest) >= (users[i].age - num) && users[i].username != currentUser.username) {
 			closest = users[i].age;
 			user = users[i];
 		}
-		console.log("thse are alle ages" + users[i].age);
+		console.log(users[i].age);
 	}
    return user;
 }

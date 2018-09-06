@@ -2,7 +2,21 @@
 <% include ../partials/navbar %>
 
 
+<div class="container-fluid header_container">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2">
+				<img id="avatar_image" src="uploads/<%= match.profileImage %>">
+			</div>
+			<div class="col-sm-6 user_metadata">
+				<h1><%= match.username %></h1>
+				<span></span>
+			</div>
+			<div class="col-sm-4">
 
-<%= match %>
+			</div>
+		</div>
+	</div>
+</div>
 
 <% include ../partials/header %>
