@@ -61,13 +61,25 @@ router.get('/user/settings/security', ensureAuthenticated, function(req, res, ne
 	res.render('authed/settings');
 })
 
+router.post('/user/settings/security/DeleteAccount', ensureAuthenticated, function(req, res) {
+	User.deleteUserByID(req.user._id, function(err, feedback){
+		if (err) {
+			throw err;
+		}
+		console.log(feedback);
+		console.log('Account deleted');
+		res.location('/');
+		res.redirect('/');
+	});
+})
+
+
 router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 	User.find({}, function(err, users){
-<<<<<<< HEAD
 		if(err){
 			console.log(err);
 		} else {
-			var matches; 
+			var matches;
 
 			var match = bestMatch(req.user.age, users)
 			console.log(match);
@@ -91,18 +103,6 @@ function bestMatch(num, users) {
 	}
    return user;
 }
-
-=======
-        if(err){
-          console.log(err);
-        } else {
-            res.render('authed/matches', users);
-            console.log(users);
-        }
-    })
-	// res.render('authed/matches');
-})
->>>>>>> 9cc5a810404db600062043930d27145000699acf
 
 //Post request used in the login form
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid username or password'}), function(req, res) {
