@@ -144,6 +144,9 @@ router.post('/register', function(req, res, next) {
 	var postcode = req.body.postcode;
 	var gender = req.body.gender;
 	var preferedSex = req.body.preferedSex;
+	var distance = "all";
+	var minimumAge = 18;
+	var maximumAge = 100;
 	var password = req.body.password;
 	var confirmPassword = req.body.confirmPassword;
 	var profileimage = 'noimage.png';
@@ -173,6 +176,9 @@ router.post('/register', function(req, res, next) {
 			city: city,
 			postcode: postcode,
 			gender: gender,
+			distance: distance,
+			minimumAge: minimumAge,
+			maximumAge: maximumAge,
 			preferedSex: preferedSex,
 			password: password,
 			profileImage: profileimage,
