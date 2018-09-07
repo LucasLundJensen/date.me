@@ -15,6 +15,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 var User = require('../models/user');
+var Matches = require('../models/matches')
 
 passport.serializeUser(function(user, done) {
 	done(null, user.id);
