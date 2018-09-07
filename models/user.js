@@ -41,9 +41,6 @@ var UserSchema = mongoose.Schema({
 	joinDate: {
 		type: String
 	},
-	distance: {
-		type: String
-	},
 	minimumAge: {
 		type: Number
 	},

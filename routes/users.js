@@ -86,29 +86,12 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 		if(err){
 			console.log(err);
 		} else {
-			var matches;
-
-			var match = bestMatchByAge(req.user.age, users, req.user)
+			var match = Matches.bestMatchByAge(req.user.age, users, req.user)
 			res.render('authed/matches', {match: match});
 			console.log(match);
 		}
 	});
 })
-
-
-
-function bestMatchByAge(num, users, currentUser) {
-   var closest = null;
-   var user = null;
-	for (var i = 0; i < users.length; i++) {
-		if (closest === null || (num - closest) >= (users[i].age - num) && users[i].username != currentUser.username) {
-			closest = users[i].age;
-			user = users[i];
-		}
-		console.log(users[i].age);
-	}
-   return user;
-}
 
 //Post request used in the login form
 router.post('/login', passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid username or password'}), function(req, res) {
@@ -164,7 +147,6 @@ router.post('/register', function(req, res, next) {
 	var postcode = req.body.postcode;
 	var gender = req.body.gender;
 	var preferedSex = req.body.preferedSex;
-	var distance = "all";
 	var bio = "";
 	var minimumAge = 18;
 	var maximumAge = 100;
@@ -197,7 +179,6 @@ router.post('/register', function(req, res, next) {
 			city: city,
 			postcode: postcode,
 			gender: gender,
-			distance: distance,
 			minimumAge: minimumAge,
 			maximumAge: maximumAge,
 			preferedSex: preferedSex,
