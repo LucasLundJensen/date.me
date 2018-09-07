@@ -26,3 +26,11 @@
     padding-right: 2px;
     padding-left: 2px;
 }
+
+.meta_container{
+    margin-top: 2.5rem;
+}
+
+.user_meta_bio p{
+    color: #9cb3c9;
+}

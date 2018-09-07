@@ -68,17 +68,17 @@ module.exports.createUser = function(newUser, callback) {
 }
 
 //Update the users image
-module.exports.updateUserImage = function(username, profileImage, callback){
-	var findQuery = {username: username};
+module.exports.updateUserImage = function(userid, profileImage, callback){
+	var findQuery = {"_id": userid};
 	var updateQuery = {$set:{profileImage: profileImage}};
 
 	User.update(findQuery, updateQuery, callback);
 }
 
 //Update the users Standards
-module.exports.updateUserStandards = function(username, minimumAge, maximumAge, bio, callback){
-	var findQuery = {username: username};
-	var updateQuery = {$set:{minimumAge: minimumAge, maximumAge: maximumAge, bio: bio}};
+module.exports.updateUserStandards = function(userid, minimumAge, maximumAge, callback){
+	var findQuery = {"_id": userid};
+	var updateQuery = {$set:{minimumAge: minimumAge, maximumAge: maximumAge}};
 
 	User.update(findQuery, updateQuery, callback);
 }
@@ -96,6 +96,13 @@ module.exports.getUserByUsername = function(username, callback){
 	User.findOne(query, callback);
 }
 
+//Get user by email
+module.exports.getUserByEmail = function(email, callback){
+	email = email.toLowerCase();
+	var query = {email: email};
+	User.findOne(query, callback);
+}
+
 
 //Compare passwords (used in login)
 module.exports.comparePassword = function(candidatePassword, hash, callback) {
@@ -108,4 +115,11 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 module.exports.deleteUserByID = function(userid, callback) {
 	var query = {"_id": userid}
 	User.deleteOne(query, callback);
+}
+
+module.exports.updateBio = function(userid, bio, callback) {
+	var findQuery = {"_id": userid};
+	var updateQuery = {$set:{bio: bio}};
+
+	User.update(findQuery, updateQuery, callback);
 }
