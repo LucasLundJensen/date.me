@@ -1,15 +1,17 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 
-<div class="container">
+<div class="container settings_container">
     <%- messages() %>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3 settings_category">
             <ul>
                 <li>
+                    <i class="fas fa-user"></i>
                     <a href="/user/settings/profile">Profile</a>
                 </li>
                 <li>
+                    <i class="fas fa-lock"></i>
                     <a href="/user/settings/security">Security</a>
                 </li>
             </ul>
@@ -20,6 +22,7 @@
                 <div class="row">
                     <div class="col-sm-6 text-center">
                         <h5>Update Profile Image</h5>
+                        <hr class="custom-hr">
                         <div class="updateImage">
                             <form action="/user/settings/profile/updateProfileImage" method="POST" enctype="multipart/form-data">
                                 <div class="form-group inputDnD">
@@ -32,10 +35,11 @@
                     </div>
                     <div class="col-sm-6 text-center">
                         <h5>Update Profile Bio</h5>
+                        <hr class="custom-hr">
                         <div class="updateBio">
                             <form action="/user/settings/profile/UpdateBio" method="POST">
                                 <div class="form-group">
-                                    <textarea name="bio" cols="10" rows="2" class="form-control"></textarea>
+                                    <textarea name="bio" cols="10" rows="2" class="form-control"><%= user.bio %></textarea>
                                 </div>
                                 <button class="btn btn-success w-100" type="submit">Submit</button>
                             </form>
@@ -43,22 +47,68 @@
                     </div>
                 </div>
 
+                <div class="row settings_row">
+                    <div class="col-sm-6 text-center">
+                        <h5>Update Gender</h5>
+                        <hr class="custom-hr">
+                        <div class="updateGender">
+                            <form action="/user/settings/profile/UpdateGender" method="POST">
+                                <div class="form-group">
+                                    <select name="gender" class="form-control">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-success w-100" type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <h5>Update City</h5>
+                        <hr class="custom-hr">
+                        <div class="updateCity">
+                                <form action="/user/settings/profile/UpdateCity" method="POST">
+                                    <div class="form-group">
+                                        <input value="<%= user.city %>" type="text" name="city" class="form-control" max="1">
+                                    </div>
+                                    <button class="btn btn-success w-100" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+
             <%} else if (locals.url === "/user/settings/security") {%>
 
 
                 <div class="row">
-                    <div class="col-sm-6 text-center">
-                        <h5>Delete Account</h5>
+                    <div class="col-sm-6">
+                        <h5 class="text-center">Change Password</h5>
                         <hr class="custom-hr">
                         <div class="deleteAccount">
-                            <p>
-                                Deleting your account will permanently delete all of your user data, and it won't be recoverable.
-                                Make sure you want to delete your account.
-                            </p>
 
-                            <button class="btn btn-danger w-100" onclick="test()">Delete Account</button>
+                            <form action="/user/settings/security/UpdatePassword" method="POST">
+                                <div class="form-group">
+                                    <input placeholder="Current password" name="currentPassword" type="password" class="form-control">
+                                    <input placeholder="New password" name="newPassword" type="password" class="form-control">
+                                </div>
+                                
+                            <button type="submit" class="btn btn-danger w-100">Change Password</button>
+                            </form>
                         </div>
                     </div>
+
+                    <div class="col-sm-6 text-center">
+                            <h5>Delete Account</h5>
+                            <hr class="custom-hr">
+                            <div class="deleteAccount">
+                                <p>
+                                    Deleting your account will permanently delete all of your user data, and it won't be recoverable.
+                                    Make sure you want to delete your account.
+                                </p>
+    
+                                <button class="btn btn-danger w-100" onclick="deleteAccountNotification()">Delete Account</button>
+                            </div>
+                        </div>
                 </div>
 
                 

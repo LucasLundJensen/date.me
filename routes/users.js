@@ -95,8 +95,62 @@ router.post('/user/settings/profile/UpdateBio', ensureAuthenticated, function(re
 	})
 })
 
+router.post('/user/settings/profile/UpdateGender', ensureAuthenticated, function(req, res) {
+	User.updateGender(req.user._id, req.body.gender, function(err, feedback) {
+		if(err) {
+			req.flash('error', 'Gender did not get updated');
+			res.location('/user/settings/profile')
+			res.redirect('/user/settings/profile')
+			throw err;
+		}
+		console.log(feedback);
+
+		req.flash('success', 'Gender has been updated');
+		res.location('/user/settings/profile')
+		res.redirect('/user/settings/profile')
+	})
+})
+
+router.post('/user/settings/profile/UpdateCity', ensureAuthenticated, function(req, res) {
+	User.updateCity(req.user._id, req.body.city, function(err, feedback) {
+		if(err) {
+			req.flash('error', 'City did not get updated');
+			res.location('/user/settings/profile')
+			res.redirect('/user/settings/profile')
+			throw err;
+		}
+		console.log(feedback);
+
+		req.flash('success', 'City has been updated');
+		res.location('/user/settings/profile')
+		res.redirect('/user/settings/profile')
+	})
+})
+
+router.post('/user/settings/security/UpdatePassword', ensureAuthenticated, function(req, res) {
+	User.updatePassword(req.user._id, req.body.newPassword, req.body.currentPassword, req.user.password, function(err, feedback){
+		if(err) {
+			req.flash('error', 'Password could not be updated')
+			req.location('/user/settings/security')
+			req.redirect('/user/settings/security')
+			throw err;
+		}
+
+		console.log(feedback);
+
+		req.flash('success', 'Password has been updated');
+		res.location('/user/settings/security');
+		res.redirect('/user/settings/security');
+	})
+})
+
 router.post('/user/settings/profile/updateProfileImage', upload.single('avatar'), function(req, res, next){
-	User.updateUserImage(req.user.username, req.file.filename, function(err, feedback){
+	if(req.file === undefined){
+		var uploadedImage = "noimage.png"
+	} else {
+		var uploadedImage = req.file.filename
+	}
+	User.updateUserImage(req.user._id, uploadedImage, function(err, feedback){
 		if (err) {
 			throw err;
 		}
@@ -119,7 +173,7 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 		if(err){
 			console.log(err);
 		} else {
-			var match = Matches.bestMatchByAge(req.user.age, users, req.user)
+			var match = Matches.bestMatchByAge(users, req.user)
 			res.render('authed/matches', {match: match});
 			console.log(match);
 		}
@@ -127,7 +181,7 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 })
 
 router.post('/user/editStandards', function(req, res, next){
-	User.updateUserStandards(req.user.username, req.body.minimumAge, req.body.maximumAge, function(err, feedback){
+	User.updateUserStandards(req.user._id, req.body.minimumAge, req.body.maximumAge, function(err, feedback){
 		if (err) {
 			throw err;
 		}

@@ -123,3 +123,36 @@ module.exports.updateBio = function(userid, bio, callback) {
 
 	User.update(findQuery, updateQuery, callback);
 }
+
+module.exports.updateGender = function(userid, gender, callback){
+	var findQuery = {"_id": userid};
+	var updateQuery = {$set:{gender: gender}};
+
+	User.update(findQuery, updateQuery, callback);
+}
+
+module.exports.updateCity = function(userid, city, callback){
+	var findQuery = {"_id": userid};
+	var updateQuery = {$set:{city: city}};
+
+	User.update(findQuery, updateQuery, callback);
+}
+
+module.exports.updatePassword = function(userid, newPassword, guessCurrentPassword, actualPassword, callback){
+	this.comparePassword(guessCurrentPassword, actualPassword, function(err, isMatch) {
+		if (err) return err;
+		if (isMatch) {
+			bcrypt.genSalt(10, function(err, salt) {
+				bcrypt.hash(newPassword, salt, function(err, hash) {
+					newPassword = hash;
+					var findQuery = {"_id": userid};
+					var updateQuery = {$set:{password: newPassword}};
+
+					User.update(findQuery, updateQuery, callback);
+				})
+			})
+		}else {
+			return false;
+		}
+	});
+}
