@@ -126,7 +126,7 @@ router.post('/user/updateProfileImage', upload.single('avatar'), function(req, r
 })
 
 router.post('/user/editStandards', function(req, res, next){
-	User.updateUserStandards(req.user.username, req.body.minimumAge, req.body.maximumAge, req.body.distance, function(err, feedback){
+	User.updateUserStandards(req.user.username, req.body.minimumAge, req.body.maximumAge, req.body.bio, function(err, feedback){
 		if (err) {
 			throw err;
 		}
