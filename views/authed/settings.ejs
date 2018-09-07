@@ -2,6 +2,7 @@
 <% include ../partials/navbar %>
 
 <div class="container">
+    <%- messages() %>
     <div class="row">
         <div class="col-sm-3">
             <ul>
@@ -33,11 +34,27 @@
 
             <%} else if (locals.url === "/user/settings/security") {%>
 
-                <h1>Security settings</h1>
 
-                <form action="/user/settings/security/DeleteAccount" method="POST">
-                    <button type="submit" class="btn btn-danger">Delete Account</button>
-                </form>
+                <div class="row">
+                    <div class="col-sm-6 text-center">
+                        <h5>Delete Account</h5>
+                        <hr class="custom-hr">
+                        <div class="deleteAccount">
+                            <p>
+                                Deleting your account will permanently delete all of your user data, and it won't be recoverable.
+                                Make sure you want to delete your account.
+                            </p>
+
+                            <button class="btn btn-danger w-100" onclick="swal('Delete Account?', 'Are you sure you want to delete your account?', 'warning')">Delete Account</button>
+
+                            <form action="/user/settings/security/DeleteAccount" method="POST">
+                                <button type="submit" class="btn btn-danger w-100">Delete Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                
 
             <%}%>
         </div>

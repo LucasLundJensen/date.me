@@ -40,6 +40,15 @@ var UserSchema = mongoose.Schema({
 	},
 	joinDate: {
 		type: String
+	},
+	distance: {
+		type: String
+	},
+	minimumAge: {
+		type: Number
+	},
+	maximumAge: {
+		type: Number
 	}
 });
 
@@ -62,6 +71,14 @@ module.exports.createUser = function(newUser, callback) {
 module.exports.updateUserImage = function(username, profileImage, callback){
 	var findQuery = {username: username};
 	var updateQuery = {$set:{profileImage: profileImage}};
+
+	User.update(findQuery, updateQuery, callback);
+}
+
+//Update the users Standards
+module.exports.updateUserStandards = function(username, minimumAge, maximumAge, distance, callback){
+	var findQuery = {username: username};
+	var updateQuery = {$set:{minimumAge: minimumAge, maximumAge: maximumAge, distance: distance}};
 
 	User.update(findQuery, updateQuery, callback);
 }

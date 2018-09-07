@@ -2,7 +2,15 @@
 <% include ../partials/navbar %>
 
 
+<a href="/user/editStandards">Edit</a>
 
-<%= match %>
+
+<div class="card">
+    <img src="uploads/<%= match.profileImage %>" alt="John" style="width:100%">
+    <h1><%= match.username %></h1>
+    <p class="title"><%= match.gender %></p>
+    <p><%= match.city %></p>
+    <p><button>Contact</button></p>
+</div>
 
 <% include ../partials/header %>

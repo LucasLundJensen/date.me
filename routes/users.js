@@ -61,13 +61,19 @@ router.get('/user/settings/security', ensureAuthenticated, function(req, res, ne
 	res.render('authed/settings');
 })
 
+router.get('/user/editStandards', ensureAuthenticated, function(req, res, next) {
+	res.render('authed/editStandards');
+})
+
+
 router.post('/user/settings/security/DeleteAccount', ensureAuthenticated, function(req, res) {
 	User.deleteUserByID(req.user._id, function(err, feedback){
 		if (err) {
 			throw err;
 		}
 		console.log(feedback);
-		console.log('Account deleted');
+
+		req.flash('success', 'Account has been deleted');
 		res.location('/');
 		res.redirect('/');
 	});
@@ -81,25 +87,24 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 		} else {
 			var matches;
 
-			var match = bestMatch(req.user.age, users)
-			console.log(match);
+			var match = bestMatchByAge(req.user.age, users, req.user)
 			res.render('authed/matches', {match: match});
+			console.log(match);
 		}
 	});
-	// res.render('authed/matches');
 })
 
 
 
-function bestMatch(num, users) {
+function bestMatchByAge(num, users, currentUser) {
    var closest = null;
    var user = null;
 	for (var i = 0; i < users.length; i++) {
-		if (closest === null || (num - closest) > (users[i].age - num) && users[i].age != num) {
+		if (closest === null || (num - closest) >= (users[i].age - num) && users[i].username != currentUser.username) {
 			closest = users[i].age;
 			user = users[i];
 		}
-		console.log("thse are alle ages" + users[i].age);
+		console.log(users[i].age);
 	}
    return user;
 }
@@ -128,8 +133,25 @@ router.post('/user/updateProfileImage', upload.single('avatar'), function(req, r
 			throw err;
 		}
 		console.log(feedback);
+
+		req.flash('success', 'Profile picture has been updated!')
+
 		res.location('/user/settings/profile');
 		res.redirect('/user/settings/profile');
+	});
+})
+
+router.post('/user/editStandards', function(req, res, next){
+	User.updateUserStandards(req.user.username, req.body.minimumAge, req.body.maximumAge, req.body.distance, function(err, feedback){
+		if (err) {
+			throw err;
+		}
+		console.log(feedback);
+
+		req.flash('success', 'Your standards has been changed!')
+
+		res.location('/user/matches');
+		res.redirect('/user/matches');
 	});
 })
 
@@ -141,6 +163,9 @@ router.post('/register', function(req, res, next) {
 	var postcode = req.body.postcode;
 	var gender = req.body.gender;
 	var preferedSex = req.body.preferedSex;
+	var distance = "all";
+	var minimumAge = 18;
+	var maximumAge = 100;
 	var password = req.body.password;
 	var confirmPassword = req.body.confirmPassword;
 	var profileimage = 'noimage.png';
@@ -170,6 +195,9 @@ router.post('/register', function(req, res, next) {
 			city: city,
 			postcode: postcode,
 			gender: gender,
+			distance: distance,
+			minimumAge: minimumAge,
+			maximumAge: maximumAge,
 			preferedSex: preferedSex,
 			password: password,
 			profileImage: profileimage,
@@ -189,6 +217,8 @@ router.post('/register', function(req, res, next) {
 		res.redirect('/');
 	}
 });
+
+
 
 function ensureAuthenticated(req, res, next){
 	if (req.isAuthenticated()) {

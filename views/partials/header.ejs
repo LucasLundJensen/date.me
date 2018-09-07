@@ -10,11 +10,15 @@
 	<link rel="stylesheet" type="text/css" href="../libs/fontawesome/css/all.css">
 	<link rel="stylesheet" type="text/css" href="../libs/jquery/jquery.js">
 	<link rel="stylesheet" type="text/css" href="../css/app.css">
+	<link rel="stylesheet" type="text/css" href="../css/matches.css">
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- this only loads the profile.css file if the user is on the url /user/profile/ -->
 	<% if(locals.url === '/user/profile') {%><%- '<link rel="stylesheet" type="text/css" href="../css/profile.css">' %><% } %>
 	<% if(locals.url === '/user/settings/profile' || locals.url === '/user/settings/security') {%><%- '<link rel="stylesheet" type="text/css" href="../css/settings.css">' %><% } %>
 	<script src="../libs/jquery/jquery.js"></script>
 	<script src="../libs/bootstrap/js/bootstrap.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
