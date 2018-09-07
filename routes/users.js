@@ -173,7 +173,7 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 		if(err){
 			console.log(err);
 		} else {
-			var match = Matches.bestMatchByAge(users, req.user)
+			var match = Matches.bestMatch(users, req.user)
 			res.render('authed/matches', {match: match});
 			console.log(match);
 		}

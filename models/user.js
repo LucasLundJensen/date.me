@@ -30,7 +30,7 @@ var UserSchema = mongoose.Schema({
 		type: Number
 	},
 	age: {
-		type: String
+		type: Number
 	},
 	city: {
 		type: String
