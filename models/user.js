@@ -49,6 +49,9 @@ var UserSchema = mongoose.Schema({
 	},
 	maximumAge: {
 		type: Number
+	},
+	bio: {
+		type: String
 	}
 });
 

@@ -165,6 +165,7 @@ router.post('/register', function(req, res, next) {
 	var gender = req.body.gender;
 	var preferedSex = req.body.preferedSex;
 	var distance = "all";
+	var bio = "";
 	var minimumAge = 18;
 	var maximumAge = 100;
 	var password = req.body.password;
@@ -201,6 +202,7 @@ router.post('/register', function(req, res, next) {
 			maximumAge: maximumAge,
 			preferedSex: preferedSex,
 			password: password,
+			bio: bio,
 			profileImage: profileimage,
 			accountRank: accountRank
 		});
