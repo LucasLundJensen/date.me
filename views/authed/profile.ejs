@@ -15,18 +15,30 @@
 				<span>·</span>
 				<span><%= user.gender %></span>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3 message_column" id="top_message_column">
 
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container meta_container">
+<div class="container">
 	<div class="row">
 		<div class="col-sm-6 offset-sm-2 user_meta_bio">
 			<p><%= user.bio %></p>
 		</div>
+		<div class="col-sm-3 message_column">
+
+		</div>
 	</div>
+
+	<!-- This row is only used for the custom-hr -->
+	<div class="row">
+		<div class="col-sm-8">
+			<hr class="custom-hr">
+		</div>
+	</div>
+
+
 </div>
 
 <% include ../partials/footer %>

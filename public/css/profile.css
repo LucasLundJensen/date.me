@@ -27,10 +27,18 @@
     padding-left: 2px;
 }
 
-.meta_container{
+.user_meta_bio{
     margin-top: 2.5rem;
 }
 
 .user_meta_bio p{
     color: #9cb3c9;
+}
+
+.message_column {
+    background-color: #274059;
+}
+
+#top_message_column {
+    margin-top: 4rem;
 }
