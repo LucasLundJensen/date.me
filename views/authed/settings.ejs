@@ -45,11 +45,7 @@
                                 Make sure you want to delete your account.
                             </p>
 
-                            <button class="btn btn-danger w-100" onclick="swal('Delete Account?', 'Are you sure you want to delete your account?', 'warning')">Delete Account</button>
-
-                            <form action="/user/settings/security/DeleteAccount" method="POST">
-                                <button type="submit" class="btn btn-danger w-100">Delete Account</button>
-                            </form>
+                            <button class="btn btn-danger w-100" onclick="test()">Delete Account</button>
                         </div>
                     </div>
                 </div>
@@ -62,6 +58,8 @@
 </div>
 
 <% if (locals.url === "/user/settings/profile") { %>
-<script src="../js/settings.js"></script>
+<script src="../js/profileSettings.js"></script>
+<%} else if (locals.url === "/user/settings/security") { %>
+<script src="../js/securitySettings.js"></script>
 <% } %>
 <% include ../partials/footer %>

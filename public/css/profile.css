@@ -20,7 +20,9 @@
     padding-top: 1rem;
 }
 
-.user_metadata p {
+.user_metadata span {
     color: #9cb3c9;
     font-size: 18px;
+    padding-right: 2px;
+    padding-left: 2px;
 }

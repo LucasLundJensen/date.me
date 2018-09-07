@@ -9,8 +9,11 @@
 			</div>
 			<div class="col-sm-6 user_metadata">
 				<h1><%= user.username %></h1>
-				<span></span>
-				<p>19 · City of London, United Kingdom · joined 6 months ago</p>
+				<span><%= user.age %></span>
+				<span>·</span>
+				<span><%= user.city %> (<%= user.postcode %>)</span>
+				<span>·</span>
+				<span><%= user.gender %></span>
 			</div>
 			<div class="col-sm-4">
 
