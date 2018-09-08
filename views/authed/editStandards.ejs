@@ -1,33 +1,31 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 
-<div class="row">
-	<div class="col-sm-12">
-		<div class="user-form-box">
-			<h3>Edit Standards</h3>
+<div class="h-50 row">
+	<div class="col-md-2 offset-md-5 col-sm-1">
+		<h3>Edit Standards</h3>
 
-			<% if(locals.errors) { %>
-				<% errors.forEach(function(error) { %>
-					<div class="alert alert-danger"><%= error.msg %></div>
-				<% }) ;%>
-			<% } %>
+		<% if(locals.errors) { %>
+			<% errors.forEach(function(error) { %>
+				<div class="alert alert-danger"><%= error.msg %></div>
+			<% }) ;%>
+		<% } %>
 
-			<div class="user-form">
-				<form method="POST" action="user/editStandards">
-					<div class="form-group">
-						<label>minimum age</label>
-						<input type="text" class="form-control" name="minimumAge" placeholder="Enter minimum age...">
-					</div>
-					<div class="form-group">
-						<label>Maximum age</label>
-						<input type="text" class="form-control" name="maximumAge" placeholder="Enter maximum age...">
-					</div>
+		<div class="user-form">
+			<form method="POST" action="user/editStandards">
+				<div class="form-group">
+					<label>minimum age</label>
+					<input type="text" class="form-control" name="minimumAge" placeholder="Enter minimum age...">
+				</div>
+				<div class="form-group">
+					<label>Maximum age</label>
+					<input type="text" class="form-control" name="maximumAge" placeholder="Enter maximum age...">
+				</div>
 
-					<div class="form-group d-flex btn-label-inline">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				</form>
-			</div>
+				<div class="form-group d-flex btn-label-inline">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

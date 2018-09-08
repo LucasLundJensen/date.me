@@ -40,6 +40,10 @@ html, body {
   margin-bottom: 2rem; 
 }
 
+.register_title {
+  text-align: center;
+}
+
 /* These are the messages that is seen when a user changes its settings / logins */
 #messages {
   margin-bottom: 20px;
