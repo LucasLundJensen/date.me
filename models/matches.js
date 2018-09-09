@@ -32,7 +32,7 @@ module.exports.createMatch = function(newMatch, callback) {
 
 // Check if match exists
 module.exports.matchExist = function(email, callback){
-	var query = {email: email, response: 'waiting'};
+	var query = {email: email, response: 'awaiting'};
 	User.find(query, callback);
 }
 
@@ -44,13 +44,20 @@ module.exports.updateResponse = function(email, response, callback) {
 	Match.updateOne(findQuery, updateQuery, callback);
 }
 
-module.exports.bestMatch = function(users, currentUser) {
+module.exports.bestMatch = function(users, matches,  currentUser) {
     var closest = null;
     var user = [];
     for (var i = 0; i < users.length; i++) {
         if ((closest === null || (currentUser.age - closest) >= (users[i].age - currentUser.age)) && users[i].email != currentUser.email) {
             if (currentUser.preferedSex == users[i].gender){
                 if (currentUser.maximumAge >= users[i].age && currentUser.minimumAge <= users[i].age){
+					if(matches.length > 0){
+						for (var i = 0; i < matches.length; i++) {
+							if (matches[i].response == "declined") {
+								continue;
+							}
+						}
+					}
                     closest = users[i].age;
                     user = users[i];
                 }

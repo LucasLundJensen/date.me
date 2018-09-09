@@ -188,20 +188,40 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 			console.log(err);
 		} else {
 
-			var match = Match.bestMatch(users, req.user)
-			var response = "";
-
 			Match.find({email: req.user.email}, function(err, matches){
+				var match = Match.bestMatch(users, matches, req.user)
+				var response = "";
+
 				if(err) {
 					console.log(err);
 				} else {
 					if (matches[0] != null) {
-						response = matches[0].response;
+						response = match.response;
+
+						console.log("if");
+
+						if (response == "declined") {
+							var email = req.user.email.toLowerCase();
+							var matchEmail = match.email.toLowerCase();
+							var response = "awaiting";
+				
+							var newMatch = new Match({
+								email: email,
+								matchEmail: matchEmail,
+								response: response,
+							});
+				
+							Match.createMatch(newMatch, function(err, match){
+								if (err) {
+									throw err;
+								}
+							});
+						}
 
 						res.render('authed/matches', {match: match});
 
 					} else {
-
+						console.log("else");
 						var email = req.user.email.toLowerCase();
 						var matchEmail = match.email.toLowerCase();
 						var response = "awaiting";
@@ -219,11 +239,9 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 						});
 			
 						res.render('authed/matches', {match: match});
-			
 					}
 				}
 			});
-
 		}
 	});
 })
