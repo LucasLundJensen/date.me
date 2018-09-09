@@ -15,11 +15,11 @@
 			<form method="POST" action="user/editStandards">
 				<div class="form-group">
 					<label>minimum age</label>
-					<input type="text" class="form-control" name="minimumAge" placeholder="Enter minimum age...">
+					<input type="text" class="form-control" name="minimumAge" value="<%= user.minimumAge %>" placeholder="Enter minimum age...">
 				</div>
 				<div class="form-group">
 					<label>Maximum age</label>
-					<input type="text" class="form-control" name="maximumAge" placeholder="Enter maximum age...">
+					<input type="text" class="form-control" name="maximumAge" value="<%= user.maximumAge %>" placeholder="Enter maximum age...">
 				</div>
 
 				<div class="form-group d-flex btn-label-inline">
