@@ -49,8 +49,13 @@ passport.use(new LocalStrategy({
 	});
 }));
 
-router.get('/user/profile', ensureAuthenticated, function(req, res){
-	res.render('authed/profile');
+router.get('/user/profile/:userid', ensureAuthenticated, function(req, res){
+	User.getUserById(req.params.userid, function(err, user) {
+		if (err) throw err;
+
+	res.render('authed/profile', {fetchedUser: user});
+
+	})
 });
 
 //Settings Page
