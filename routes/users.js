@@ -188,13 +188,23 @@ router.get('/user/editStandards', ensureAuthenticated, function(req, res, next) 
 })
 
 router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
-	User.find({}, function(err, users){
+	User.find({ _id: { $ne : req.user._id}, gender: req.user.preferedSex }, function(err, users){
 		if(err){
 			console.log(err);
 		} else {
 
 			Match.find({email: req.user.email}, function(err, matches){
-				var match = Match.bestMatch(users, matches, req.user)
+
+				// Her fjerner vi de personer der er blevet declined
+				for (var i = 0; i < matches.length; i++) {
+					for (var x = 0; x < users.length; x++) {
+						if (users[x].email == matches[i].matchEmail && matches[i].response == "declined") {
+							users.splice(x, 1);
+						}
+					}
+				}
+
+				var match = Match.bestMatch(users, req.user)
 				var response = "";
 
 				if(err) {
@@ -204,24 +214,27 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 						response = match.response;
 
 						console.log("if");
+						console.log(response);
 
-						if (response == "declined") {
-							var email = req.body.email.toLowerCase();
-							var matchEmail = match.email.toLowerCase();
-							var response = "awaiting";
+						console.log(match);
+
+						// if (response == "declined" || response == null) {
+						// 	var email = req.user.email.toLowerCase();
+						// 	var matchEmail = match.email.toLowerCase();
+						// 	var response = "awaiting";
 				
-							var newMatch = new Match({
-								email: email,
-								matchEmail: matchEmail,
-								response: response,
-							});
+						// 	var newMatch = new Match({
+						// 		email: email,
+						// 		matchEmail: matchEmail,
+						// 		response: response,
+						// 	});
 				
-							Match.createMatch(newMatch, function(err, match){
-								if (err) {
-									throw err;
-								}
-							});
-						}
+						// 	Match.createMatch(newMatch, function(err, match){
+						// 		if (err) {
+						// 			throw err;
+						// 		}
+						// 	});
+						// }
 
 						res.render('authed/matches', {match: match});
 
