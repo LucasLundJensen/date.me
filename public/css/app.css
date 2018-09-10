@@ -311,11 +311,8 @@ html, body {
     background-color: #274059;
     height: 4rem;
     line-height: 3.8rem;
-    border-top: 1px solid transparent;
-    border-bottom: none;
-    border-right: none;
-    border-left: none;
-    border-radius: 6px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 #top_message_column {

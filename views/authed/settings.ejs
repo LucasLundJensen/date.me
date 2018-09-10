@@ -34,12 +34,12 @@
                         </div>
                     </div>
                     <div class="col-sm-6 text-center">
-                        <h5>Update Profile Bio</h5>
+                        <h5>Update Profile Age</h5>
                         <hr class="custom-hr">
-                        <div class="updateBio">
-                            <form action="/user/settings/profile/UpdateBio" method="POST">
+                        <div class="updateAge">
+                            <form action="/user/settings/profile/UpdateAge" method="POST">
                                 <div class="form-group">
-                                    <textarea name="bio" cols="10" rows="2" class="form-control"><%= user.bio %></textarea>
+                                    <input placeholder="Age" value="<%= user.age %>" class="form-control" type="text" name="age">
                                 </div>
                                 <button class="btn btn-success w-100" type="submit">Submit</button>
                             </form>

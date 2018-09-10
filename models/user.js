@@ -117,9 +117,9 @@ module.exports.deleteUserByID = function(userid, callback) {
 	User.deleteOne(query, callback);
 }
 
-module.exports.updateBio = function(userid, bio, callback) {
+module.exports.updateAge = function(userid, age, callback) {
 	var findQuery = {"_id": userid};
-	var updateQuery = {$set:{bio: bio}};
+	var updateQuery = {$set:{age: age}};
 
 	User.update(findQuery, updateQuery, callback);
 }

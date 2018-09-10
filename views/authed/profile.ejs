@@ -26,7 +26,12 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6 offset-sm-2 user_meta_bio">
-			<p><%= fetchedUser.bio %></p>
+			
+			<% if(fetchedUser._id.equals(user._id)) { %>
+			<i class="fas fa-wrench pull-right" onclick="edit_bio()"></i>
+			<% } %>
+
+			<p id="user_bio"><%= fetchedUser.bio %></p>
 		</div>
 		
 	</div>

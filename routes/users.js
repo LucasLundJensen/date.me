@@ -84,17 +84,17 @@ router.post('/user/settings/security/DeleteAccount', ensureAuthenticated, functi
 	});
 })
 
-router.post('/user/settings/profile/UpdateBio', ensureAuthenticated, function(req, res) {
-	User.updateBio(req.user._id, req.body.bio, function(err, feedback) {
+router.post('/user/settings/profile/UpdateAge', ensureAuthenticated, function(req, res) {
+	User.updateAge(req.user._id, req.body.age, function(err, feedback) {
 		if(err) {
-			req.flash('error', 'Bio did not get updated');
+			req.flash('error', 'Age did not get updated');
 			res.location('/user/settings/profile')
 			res.redirect('/user/settings/profile')
 			throw err;
 		}
 		console.log(feedback);
 
-		req.flash('success', 'Bio has been updated');
+		req.flash('success', 'Age has been updated');
 		res.location('/user/settings/profile')
 		res.redirect('/user/settings/profile')
 	})
