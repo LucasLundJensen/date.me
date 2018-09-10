@@ -5,7 +5,7 @@
     <a id="editStandardsButton" class="btn btn-success w-25" href="/user/editStandards">Edit standards</a>
 </div>
 
-
+<% if (match.username != null) { %>
 <div class="card">
     <img src="uploads/<%= match.profileImage %>" alt="John" style="width:100%">
     <h1><%= match.username %></h1>
@@ -20,5 +20,10 @@
         <p><button type="submit" class="btn btn-danger">Decline</button></p>
     </form>
 </div>
+<% } else { %>
+    <div class="container">
+        <h1>No matches yet. Please come back later.</h1>
+    </div>
+<% } %>
 
 <% include ../partials/header %>

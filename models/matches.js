@@ -44,25 +44,47 @@ module.exports.updateResponse = function(email, response, callback) {
 	Match.updateOne(findQuery, updateQuery, callback);
 }
 
-module.exports.bestMatch = function(users, matches,  currentUser) {
+module.exports.bestMatch = function(users, matches = [],  currentUser) {
     var closest = null;
-    var user = [];
+	var user = [];
+	Loop1:
     for (var i = 0; i < users.length; i++) {
-        if ((closest === null || (currentUser.age - closest) >= (users[i].age - currentUser.age)) && users[i].email != currentUser.email) {
+		
+		console.log("closest" + closest + " : currentUser age" + currentUser.age + " : userAge" + users[i].age);
+
+
+        if ((closest === null || (closest - currentUser.age) >= (users[i].age - currentUser.age)) && users[i].email != currentUser.email) {
+
+
             if (currentUser.preferedSex == users[i].gender){
+
+
                 if (currentUser.maximumAge >= users[i].age && currentUser.minimumAge <= users[i].age){
+
+
 					if(matches.length > 0){
-						for (var i = 0; i < matches.length; i++) {
-							if (matches[i].response == "declined") {
-								continue;
+
+						
+						for (var x = 0; x < matches.length; x++) {
+							console.log("Vi kommer ind i 1 loop");
+							if (matches[x].response == "declined") {
+								closest = users[i].age;
+								user = users[i];
+								console.log("declined");
+								continue Loop1;
+							} else if (matches[x].response == "awaiting") {
+								console.log("declined");
+								return users[i];
 							}
 						}
 					}
                     closest = users[i].age;
                     user = users[i];
-                }
-            }
-        }
+				}
+			}
+			console.log(users[i].username);
+		}
+		console.log(users[i].username);
     }
     return user;
- }
+}
