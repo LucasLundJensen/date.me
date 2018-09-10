@@ -20,7 +20,7 @@
         <a href="/logout" class="nav_item <% if(locals.url === '/logout'){%><%= 'active'%><%}%>">
           Logout
         </a>
-        <a href="/user/profile" class="nav_item nav_avatar_image">
+        <a href="/user/profile/<%= user._id %>" class="nav_item nav_avatar_image">
           <img src="/uploads/<%= user.profileImage %>">
           <% var shortUsername = user.username.split(" "); %>
           <span id="username_tooltip"><%= shortUsername[0] %></span>
