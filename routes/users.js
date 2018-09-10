@@ -49,8 +49,13 @@ passport.use(new LocalStrategy({
 	});
 }));
 
-router.get('/user/profile', ensureAuthenticated, function(req, res){
-	res.render('authed/profile');
+router.get('/user/profile/:userid', ensureAuthenticated, function(req, res){
+	User.getUserById(req.params.userid, function(err, user) {
+		if (err) throw err;
+
+	res.render('authed/profile', {fetchedUser: user});
+
+	})
 });
 
 //Settings Page
@@ -128,19 +133,19 @@ router.post('/user/settings/profile/UpdateCity', ensureAuthenticated, function(r
 })
 
 router.post('/user/settings/security/UpdatePassword', ensureAuthenticated, function(req, res) {
-	User.updatePassword(req.user._id, req.body.newPassword, req.body.currentPassword, req.user.password, function(err, feedback){
-		if(err) {
-			req.flash('error', 'Password could not be updated')
-			req.location('/user/settings/security')
-			req.redirect('/user/settings/security')
-			throw err;
+	User.comparePassword(req.body.currentPassword, req.user.password, function(err, isMatch) {
+		if (err) return done(err);
+		if (isMatch) {
+			User.updatePassword(req.user._id, req.body.newPassword, function(err, feedback) {
+				if(err) throw err;
+
+				req.flash('success', 'Account password has been updated');
+				res.redirect('/user/settings/security')
+			})
+		} else {
+			req.flash('error', 'Account password could not be updated');
+			res.redirect('/user/settings/security')
 		}
-
-		console.log(feedback);
-
-		req.flash('success', 'Password has been updated');
-		res.location('/user/settings/security');
-		res.redirect('/user/settings/security');
 	})
 })
 
@@ -201,7 +206,7 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 						console.log("if");
 
 						if (response == "declined") {
-							var email = req.user.email.toLowerCase();
+							var email = req.body.email.toLowerCase();
 							var matchEmail = match.email.toLowerCase();
 							var response = "awaiting";
 				

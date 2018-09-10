@@ -5,18 +5,20 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-2">
-				<img id="avatar_image" src="uploads/<%= user.profileImage %>">
+				<img id="avatar_image" src="uploads/<%= fetchedUser.profileImage %>">
 			</div>
 			<div class="col-sm-6 user_metadata">
-				<h1><%= user.username %></h1>
-				<span><%= user.age %></span>
+				<h1><%= fetchedUser.username %></h1>
+				<span><%= fetchedUser.age %></span>
 				<span>·</span>
-				<span><%= user.city %></span>
+				<span><%= fetchedUser.city %></span>
 				<span>·</span>
-				<span><%= user.gender %></span>
+				<span><%= fetchedUser.gender %></span>
 			</div>
 			<div class="col-sm-3 message_column" id="top_message_column">
-
+				<button class="btn custom-message-btn">
+					Contact
+				</button>
 			</div>
 		</div>
 	</div>
@@ -24,11 +26,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6 offset-sm-2 user_meta_bio">
-			<p><%= user.bio %></p>
+			<p><%= fetchedUser.bio %></p>
 		</div>
-		<div class="col-sm-3 message_column">
-
-		</div>
+		
 	</div>
 
 	<!-- This row is only used for the custom-hr -->

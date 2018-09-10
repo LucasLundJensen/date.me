@@ -37,7 +37,9 @@ html, body {
 /* Login page */
 .login_title {
   text-align: center;
-  margin-bottom: 2rem; 
+  margin-bottom: 0.5rem;
+  color: #f67280;
+  font-size: 38px;
 }
 
 .register_title {
@@ -134,4 +136,192 @@ html, body {
   border-radius: 50%;
   margin-left: 0.5rem;
   height: 32px; 
+}
+
+/* Notifications */
+
+.notification-button {
+  display: inline-block;
+  position: relative;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  background: #3498db;
+  line-height: 1.2rem;
+  border-radius: 0.2em;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.notification-button::before, 
+.notification-button::after {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.notification-button::before {
+  display: block;
+  content: "\f086";
+  font-family: "FontAwesome";
+  transform-origin: top center;
+}
+
+.notification-button::after {
+  font-family: Arial;
+  font-size: 0.8rem;
+  font-weight: 700;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  padding: 5px 8px;
+  line-height: 100%;
+  border: 2px #fff solid;
+  border-radius: 60px;
+  background: #3498db;
+  opacity: 0;
+  content: attr(data-count);
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  transition: transform, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.notification-button.notify::before {
+  -webkit-animation: ring 1.5s ease;
+  animation: ring 1.5s ease;
+}
+
+.notification-button.show-count::after {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+@-webkit-keyframes ring {
+  0% {
+      -webkit-transform: rotate(35deg);
+  }
+  12.5% {
+      -webkit-transform: rotate(-30deg);
+  }
+  25% {
+      -webkit-transform: rotate(25deg);
+  }
+  37.5% {
+      -webkit-transform: rotate(-20deg);
+  }
+  50% {
+      -webkit-transform: rotate(15deg);
+  }
+  62.5% {
+      -webkit-transform: rotate(-10deg);
+  }
+  75% {
+      -webkit-transform: rotate(5deg);
+  }
+  100% {
+      -webkit-transform: rotate(0deg);
+  }
+}
+
+@keyframes ring {
+  0% {
+      -webkit-transform: rotate(35deg);
+      transform: rotate(35deg);
+  }
+  12.5% {
+      -webkit-transform: rotate(-30deg);
+      transform: rotate(-30deg);
+  }
+  25% {
+      -webkit-transform: rotate(25deg);
+      transform: rotate(25deg);
+  }
+  37.5% {
+      -webkit-transform: rotate(-20deg);
+      transform: rotate(-20deg);
+  }
+  50% {
+      -webkit-transform: rotate(15deg);
+      transform: rotate(15deg);
+  }
+  62.5% {
+      -webkit-transform: rotate(-10deg);
+      transform: rotate(-10deg);
+  }
+  75% {
+      -webkit-transform: rotate(5deg);
+      transform: rotate(5deg);
+  }
+  100% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+}
+
+.account_register {
+  margin-top: 1.5rem;
+  font-size: 16px;
+}
+
+.account_register a {
+  font-size: 16px;
+}
+
+/* Profile Page */
+/* This is used if the user is on the profile page */
+.nav_profile_color {
+	background: #1f364d;
+}
+
+.header_container {
+	background: #1f364d;
+	padding-top: 1.5rem;
+}
+
+#avatar_image {
+    height: 145px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 12px #1f364d;
+    margin-bottom: -1rem;
+}
+
+.user_metadata h1 {
+    font-weight: 600;
+    padding-top: 1rem;
+}
+
+.user_metadata span {
+    color: #9cb3c9;
+    font-size: 18px;
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.user_meta_bio{
+    margin-top: 2.5rem;
+}
+
+.user_meta_bio p{
+    color: #9cb3c9;
+}
+
+.message_column {
+    background-color: #274059;
+    height: 4rem;
+    line-height: 3.8rem;
+    border-top: 1px solid transparent;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 6px;
+}
+
+#top_message_column {
+    margin-top: 4rem;
+}
+
+.custom-message-btn {
+  background-image: linear-gradient(to right,#e052a0,#f15c41)!important;
 }

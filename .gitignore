@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite
+/.vs/gui-opgave-h2/v15/.suo
+/.vs/ProjectSettings.json
+/GUI Opgave/.vs/GUI Opgave/v15/.suo
+/GUI Opgave/GUI Opgave.sln
