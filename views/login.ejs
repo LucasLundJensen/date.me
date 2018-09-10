@@ -1,9 +1,12 @@
 <% include partials/header %>
 
-<div class="h-100 row">
+<div class="h-100 row align-items-center">
 	<div class="col-md-2 offset-md-5 col-sm-1">
 	<%- messages() %>
-	<h1 class="login_title">Date.ME</h1>
+	<div class="login_title">
+		<span><i class="fas fa-heartbeat"></i></span>
+		<span>Date.ME</span>
+	</div>
 		<form method="POST" action="/login">
 			<div class="form-group">
 				<label>Email:</label>
@@ -14,7 +17,7 @@
 				<input type="password" name="password" class="form-control">
 			</div>
 			<button type="submit" class="btn btn-success w-100">Login</button>
-			<label class="mt-2">Already have an account? <a class="text-info" href="/register">Click here!</a></label>
+			<label class="account_register">Don't have an account yet? <a class="text-info" href="/register">Click here!</a></label>
 		</form>
 	</div>
 </div>

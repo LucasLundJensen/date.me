@@ -138,21 +138,13 @@ module.exports.updateCity = function(userid, city, callback){
 	User.update(findQuery, updateQuery, callback);
 }
 
-module.exports.updatePassword = function(userid, newPassword, guessCurrentPassword, actualPassword, callback){
-	this.comparePassword(guessCurrentPassword, actualPassword, function(err, isMatch) {
-		if (err) return err;
-		if (isMatch) {
-			bcrypt.genSalt(10, function(err, salt) {
-				bcrypt.hash(newPassword, salt, function(err, hash) {
-					newPassword = hash;
-					var findQuery = {"_id": userid};
-					var updateQuery = {$set:{password: newPassword}};
-
-					User.update(findQuery, updateQuery, callback);
-				})
-			})
-		}else {
-			return false;
-		}
-	});
+module.exports.updatePassword = function(userid, newPassword, callback){
+	bcrypt.genSalt(10, function(err, salt) {
+		bcrypt.hash(newPassword, salt, function(err, hash) {
+			newPassword = hash;
+			var findQuery = {"_id": userid};
+			var updateQuery = {$set:{password: newPassword}};
+			User.update(findQuery, updateQuery, callback);
+		})
+	})
 }

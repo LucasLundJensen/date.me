@@ -18,3 +18,23 @@ function deleteAccountNotification() {
         }
       });
 }
+
+function changePasswordNotification() {
+
+var form = document.getElementById('updatePassword');
+
+  swal({
+      title: "Are you sure?",
+      text: "Are you sure you want to update your password?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+          form.submit();
+      } else {
+        swal("Password has not been changed");
+      }
+    });
+}

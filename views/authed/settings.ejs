@@ -86,14 +86,16 @@
                         <hr class="custom-hr">
                         <div class="deleteAccount">
 
-                            <form action="/user/settings/security/UpdatePassword" method="POST">
+                            <form id="updatePassword" action="/user/settings/security/UpdatePassword" method="POST">
                                 <div class="form-group">
                                     <input placeholder="Current password" name="currentPassword" type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
                                     <input placeholder="New password" name="newPassword" type="password" class="form-control">
                                 </div>
                                 
-                            <button type="submit" class="btn btn-danger w-100">Change Password</button>
                             </form>
+                            <button class="btn btn-danger w-100" onclick="changePasswordNotification()">Change Password</button>
                         </div>
                     </div>
 
