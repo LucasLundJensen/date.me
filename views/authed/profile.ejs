@@ -14,6 +14,12 @@
 				<span><%= fetchedUser.city %></span>
 				<span>·</span>
 				<span><%= fetchedUser.gender %></span>
+				<span>·</span>
+				<% var today = new Date().toLocaleDateString() %>
+				<% var millisecondsPerDay = 1000 * 60 * 60 * 24 %>
+				<% var millisBetween = today.getTime() - user.joinDate.getTime();%>
+				<% var days = millisBetween / millisecondsPerDay %>
+				<span id="joinDate"><%= days %></span>
 			</div>
 			<div class="col-sm-3 message_column" id="top_message_column">
 				<button class="btn custom-message-btn">
