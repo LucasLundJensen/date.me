@@ -47,31 +47,17 @@ module.exports.updateResponse = function(email, response, callback) {
 module.exports.bestMatch = function(users, currentUser) {
 	var closest = null;
 	var user = null;
-
-
 	if (users[0] !== undefined){
 		closest = users[0].age;
 		user = users[0];
-	
 		for (var i = 0; i < users.length; i++) {
-			
-			console.log();
-			console.log("closest: " + closest);
-			console.log("currentUserAge: " + currentUser.age);
-			console.log("users[i].age: " + users[i].age);
-			console.log();
-	
 			if (closest === null || Math.abs(currentUser.age - closest) > Math.abs(users[i].age - currentUser.age)) {
-	
 				if (currentUser.maximumAge >= users[i].age && currentUser.minimumAge <= users[i].age){
-	
 					closest = users[i].age;
 					user = users[i];
-				
 				}
 			}
 		}
-	
 	}
     return user;
 }
