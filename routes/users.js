@@ -242,7 +242,8 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 						res.render('authed/matches', {match: match});
 					} else {
 						console.log("else");
-						if (match !== null) {
+						console.log(match);
+						if (match != null) {
 							Match.createMatchRecord(req.user.email, match.email);
 						}
 						res.render('authed/matches', {match: match});
