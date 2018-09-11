@@ -23,13 +23,21 @@
 		</div>
 	</div>
 </div>
+
+<%- messages() %>
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6 offset-sm-2 user_meta_bio">
 			
 			<% if(fetchedUser._id.equals(user._id)) { %>
 			<i class="fas fa-wrench pull-right" id="editBio"></i>
-			<textarea name="bioTextArea" id="bioTextArea" cols="30" rows="10"></textarea>
+			<form action="/user/settings/profile/UpdateBio" method="POST" class="bioForm">
+				<div class="form-group">
+					<textarea name="bio" class="form-control" rows="10"><%= fetchedUser.bio %></textarea>
+				</div>
+				<button type="submit" class="btn btn-success">Save</button>
+			</form>
 			<% } %>
 
 			<p id="user_bio"><%= fetchedUser.bio %></p>

@@ -38,6 +38,10 @@ html, body {
   display: block !important;
 }
 
+.invisible {
+  display: none;
+}
+
 /* Login page */
 .login_title {
   text-align: center;
@@ -273,8 +277,7 @@ html, body {
   font-size: 16px;
 }
 
-/* Profile Page */
-/* This is used if the user is on the profile page */
+/* Profile page */
 .nav_profile_color {
 	background: #1f364d;
 }
@@ -327,6 +330,6 @@ html, body {
   background-image: linear-gradient(to right,#e052a0,#f15c41)!important;
 }
 
-#bioTextArea {
-  display: none;
+.bioForm {
+    display: none;
 }

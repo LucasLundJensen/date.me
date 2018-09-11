@@ -12,7 +12,7 @@ var UserSchema = mongoose.Schema({
 		index: true
 	},
 	password: {
-		type: String
+		type: String,
 	},
 	email: {
 		type: String
@@ -59,13 +59,37 @@ var User = module.exports = mongoose.model('User', UserSchema);
 
 //Create user
 module.exports.createUser = function(newUser, callback) {
-	bcrypt.genSalt(10, function(err, salt) {
-		bcrypt.hash(newUser.password, salt, function(err, hash) {
-			newUser.password = hash;
-			newUser.save(callback);
-		})
+	this.checkEmailExists(newUser.email, function(err, feedback) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			if(feedback) {
+				return callback(null, false);
+			} else {
+				bcrypt.genSalt(10, function(err, salt) {
+					bcrypt.hash(newUser.password, salt, function(err, hash) {
+					newUser.password = hash;
+					newUser.save(callback);
+					})
+				})
+			}
+		}
 	})
+		
+	
+	
 }
+
+module.exports.checkEmailExists = function checkEmailExists(userEmail, callback) {
+	User.count({ email: userEmail }, function(err, count) {
+	  if (err) {
+		callback(err);
+	  } else {
+		callback(null, count !== 0);
+	  }
+	});
+  };
 
 //Update the users image
 module.exports.updateUserImage = function(userid, profileImage, callback){
@@ -120,6 +144,13 @@ module.exports.deleteUserByID = function(userid, callback) {
 module.exports.updateAge = function(userid, age, callback) {
 	var findQuery = {"_id": userid};
 	var updateQuery = {$set:{age: age}};
+
+	User.update(findQuery, updateQuery, callback);
+}
+
+module.exports.updateBio = function(userid, bio, callback) {
+	var findQuery = {"_id": userid};
+	var updateQuery = {$set:{bio: bio}};
 
 	User.update(findQuery, updateQuery, callback);
 }

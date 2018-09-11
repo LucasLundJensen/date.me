@@ -100,6 +100,23 @@ router.post('/user/settings/profile/UpdateAge', ensureAuthenticated, function(re
 	})
 })
 
+router.post('/user/settings/profile/UpdateBio', ensureAuthenticated, function(req, res) {
+	User.updateBio(req.user._id, req.body.bio, function(err, feedback) {
+		if(err) {
+			req.flash('error', 'Bio did not get updated');
+			res.location('/user/profile/' + req.user._id)
+			res.redirect('/user/profile/' + req.user._id)
+			throw err;
+		}
+		console.log(feedback);
+
+		req.flash('success', 'Bio has been updated');
+		res.location('/user/profile/' + req.user._id)
+		res.redirect('/user/profile/' + req.user._id)
+	})
+})
+
+
 router.post('/user/settings/profile/UpdateGender', ensureAuthenticated, function(req, res) {
 	User.updateGender(req.user._id, req.body.gender, function(err, feedback) {
 		if(err) {
@@ -319,13 +336,20 @@ router.post('/register', function(req, res, next) {
 	//Validator
 	req.checkBody('username', 'Username field is empty').notEmpty();
 	req.checkBody('email', 'Email field is empty').notEmpty();
+	req.checkBody('age', 'Age has to be numeric').isNumeric();
+	req.checkBody('city', 'City field is empty').notEmpty();
+	req.checkBody('postcode', 'Postcode field has to be numeric').isNumeric();
+	req.checkBody('postcode', 'Postcode field is empty').notEmpty();
+	req.checkBody('gender', 'Gender not selected').not().contains('selectGender');
+	req.checkBody('preferedSex', 'Prefered Sex not selected').not().contains('selectGender');
 	req.checkBody('password', 'Password field is empty').notEmpty();
+	req.checkBody('password', 'Password has to be atleast 5 charcters long').isLength({min: 5, max: 999});
 	req.checkBody('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
 	var errors = req.validationErrors();
 
 	if (errors) {
-		res.render('/register', {
+		res.render('register', {
 			errors: errors
 		});
 	} else {
@@ -349,13 +373,17 @@ router.post('/register', function(req, res, next) {
 			if (err) {
 				throw err;
 			}
-			console.log(user);
+			if(!user) {
+				req.flash('error', 'Account has not been created, email already exists!');
+				res.redirect('/register')
+			} else {
+				console.log(user)
+				req.flash('success', 'Account has been created!');
+
+				res.location('/');
+				res.redirect('/');
+			}
 		});
-
-		req.flash('success', 'Account has been created!');
-
-		res.location('/');
-		res.redirect('/');
 	}
 });
 

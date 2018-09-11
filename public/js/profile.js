@@ -1,4 +1,4 @@
 $( '#editBio' ).on('click', function() {
-    console.log('test');
-    $( '#bioTextArea' ).toggleClass('visible');
+    $( '.bioForm' ).toggleClass('visible');
+    $( '#user_bio' ).toggleClass('invisible');
 })
