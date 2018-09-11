@@ -50,11 +50,12 @@ passport.use(new LocalStrategy({
 }));
 
 router.get('/user/profile/:userid', ensureAuthenticated, function(req, res){
+	var today = new Date().toISOString().slice(0, 10);
+
 	User.getUserById(req.params.userid, function(err, user) {
 		if (err) throw err;
 
 	res.render('authed/profile', {fetchedUser: user});
-
 	})
 });
 
