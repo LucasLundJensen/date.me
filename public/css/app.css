@@ -333,3 +333,7 @@ html, body {
 .bioForm {
     display: none;
 }
+
+#editBio {
+  margin-bottom: 10px;
+}
