@@ -304,6 +304,7 @@ router.post('/register', function(req, res, next) {
 	var minimumAge = 18;
 	var maximumAge = 100;
 	var password = req.body.password;
+	var joinDate = new Date().toLocaleDateString();
 	var confirmPassword = req.body.confirmPassword;
 	var profileimage = 'noimage.png';
 	var accountRank;
@@ -341,6 +342,7 @@ router.post('/register', function(req, res, next) {
 			gender: gender,
 			minimumAge: minimumAge,
 			maximumAge: maximumAge,
+			joinDate: joinDate,
 			preferedSex: preferedSex,
 			password: password,
 			bio: bio,
