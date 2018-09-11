@@ -44,47 +44,29 @@ module.exports.updateResponse = function(email, response, callback) {
 	Match.updateOne(findQuery, updateQuery, callback);
 }
 
-module.exports.bestMatch = function(users, matches = [],  currentUser) {
-    var closest = null;
+module.exports.bestMatch = function(users, currentUser) {
+    var closest = users[0].age;
 	var user = [];
-	Loop1:
+
     for (var i = 0; i < users.length; i++) {
 		
-		console.log("closest" + closest + " : currentUser age" + currentUser.age + " : userAge" + users[i].age);
+		console.log();
+		console.log("closest: " + closest);
+		console.log("user: " + user);
+		console.log("currentUserAge: " + currentUser.age);
+		console.log("users[i].age: " + users[i].age);
+		console.log();
+
+        if (closest === null || Math.abs(currentUser.age - closest) > Math.abs(users[i].age - currentUser.age)) {
 
 
-        if ((closest === null || (closest - currentUser.age) >= (users[i].age - currentUser.age)) && users[i].email != currentUser.email) {
+			if (currentUser.maximumAge >= users[i].age && currentUser.minimumAge <= users[i].age){
 
-
-            if (currentUser.preferedSex == users[i].gender){
-
-
-                if (currentUser.maximumAge >= users[i].age && currentUser.minimumAge <= users[i].age){
-
-
-					if(matches.length > 0){
-
-						
-						for (var x = 0; x < matches.length; x++) {
-							console.log("Vi kommer ind i 1 loop");
-							if (matches[x].response == "declined") {
-								closest = users[i].age;
-								user = users[i];
-								console.log("declined");
-								continue Loop1;
-							} else if (matches[x].response == "awaiting") {
-								console.log("declined");
-								return users[i];
-							}
-						}
-					}
-                    closest = users[i].age;
-                    user = users[i];
-				}
+				closest = users[i].age;
+				user = users[i];
+			
 			}
-			console.log(users[i].username);
 		}
-		console.log(users[i].username);
-    }
+	}
     return user;
 }
