@@ -1,5 +1,5 @@
 {
-  "name": "squadwebsite",
+  "name": "gui-opgave-h2",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -13,7 +13,6 @@
     "body-parser": "^1.18.3",
     "bufferutil": "^3.0.3",
     "connect-flash": "^0.1.1",
-    "discord.js": "^11.4.2",
     "ejs": "^2.6.1",
     "erlpack": "github:discordapp/erlpack",
     "express": "^4.16.3",
@@ -26,7 +25,6 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "progress-stream": "^2.0.0",
-    "sweetalert": "^2.1.0",
-    "uppy": "^0.27.2"
+    "sweetalert": "^2.1.0"
   }
 }
