@@ -211,71 +211,50 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 		} else {
 
 			Match.find({email: req.user.email}, function(err, matches){
-
-				// Her fjerner vi de personer der er blevet declined
-				for (var i = 0; i < matches.length; i++) {
-					for (var x = 0; x < users.length; x++) {
-						if (users[x].email == matches[i].matchEmail && matches[i].response == "declined") {
-							users.splice(x, 1);
-						}
-					}
-				}
-
-				var match = Match.bestMatch(users, req.user)
-				var response = "";
-
 				if(err) {
 					console.log(err);
 				} else {
-					if (matches[0] != null) {
-						response = match.response;
+					var match = null;
 
-						console.log("if");
-						console.log(response);
+					// Her fjerner vi de personer der er blevet declined
+					for (var i = 0; i < matches.length; i++) {
+						for (var x = 0; x < users.length; x++) {
+							if (users[x].email == matches[i].matchEmail && matches[i].response == "declined") {
+								users.splice(x, 1);
+							}
+						}
+					}
+					match = Match.bestMatch(users, req.user)
+					var response = "";
 
-						console.log(match);
+					if (match != null) {
+						if (matches.length > 0) {
+							var temp = 0;
+							for(var i = 0; i < matches.length; i++){
+								if (matches[i].matchEmail == match.email) {
+									temp = 1;
+								}
+							}
+							if(temp == 0) {
+								Match.createMatchRecord(req.user.email, match.email);
 
-						// if (response == "declined" || response == null) {
-						// 	var email = req.user.email.toLowerCase();
-						// 	var matchEmail = match.email.toLowerCase();
-						// 	var response = "awaiting";
-				
-						// 	var newMatch = new Match({
-						// 		email: email,
-						// 		matchEmail: matchEmail,
-						// 		response: response,
-						// 	});
-				
-						// 	Match.createMatch(newMatch, function(err, match){
-						// 		if (err) {
-						// 			throw err;
-						// 		}
-						// 	});
-						// }
+							}
+						} else {
+							console.log("loop else");
+							Match.createMatchRecord(req.user.email, match.email);
+						}
 
 						res.render('authed/matches', {match: match});
 
 					} else {
 						console.log("else");
-						var email = req.user.email.toLowerCase();
-						var matchEmail = match.email.toLowerCase();
-						var response = "awaiting";
-			
-						var newMatch = new Match({
-							email: email,
-							matchEmail: matchEmail,
-							response: response,
-						});
-			
-						Match.createMatch(newMatch, function(err, match){
-							if (err) {
-								throw err;
-							}
-						});
-			
+						if (match !== null) {
+							Match.createMatchRecord(req.user.email, match.email);
+						}
 						res.render('authed/matches', {match: match});
 					}
-				}
+
+				} 
 			});
 		}
 	});

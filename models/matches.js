@@ -38,35 +38,59 @@ module.exports.matchExist = function(email, callback){
 
 // Update Match response to Match
 module.exports.updateResponse = function(email, response, callback) {
-	var findQuery = {"email": email};
+	var findQuery = {"email": email, "response" : "awaiting" };
 	var updateQuery = {$set:{response: response}};
 
 	Match.updateOne(findQuery, updateQuery, callback);
 }
 
 module.exports.bestMatch = function(users, currentUser) {
-    var closest = users[0].age;
-	var user = [];
-
-    for (var i = 0; i < users.length; i++) {
-		
-		console.log();
-		console.log("closest: " + closest);
-		console.log("user: " + user);
-		console.log("currentUserAge: " + currentUser.age);
-		console.log("users[i].age: " + users[i].age);
-		console.log();
-
-        if (closest === null || Math.abs(currentUser.age - closest) > Math.abs(users[i].age - currentUser.age)) {
+	var closest = null;
+	var user = null;
 
 
-			if (currentUser.maximumAge >= users[i].age && currentUser.minimumAge <= users[i].age){
-
-				closest = users[i].age;
-				user = users[i];
+	if (users[0] !== undefined){
+		closest = users[0].age;
+		user = users[0];
+	
+		for (var i = 0; i < users.length; i++) {
 			
+			console.log();
+			console.log("closest: " + closest);
+			console.log("currentUserAge: " + currentUser.age);
+			console.log("users[i].age: " + users[i].age);
+			console.log();
+	
+			if (closest === null || Math.abs(currentUser.age - closest) > Math.abs(users[i].age - currentUser.age)) {
+	
+				if (currentUser.maximumAge >= users[i].age && currentUser.minimumAge <= users[i].age){
+	
+					closest = users[i].age;
+					user = users[i];
+				
+				}
 			}
 		}
+	
 	}
     return user;
+}
+
+
+module.exports.createMatchRecord = function(email, matchEmail) {
+    var email = email.toLowerCase();
+	var matchEmail = matchEmail.toLowerCase();
+	var response = "awaiting";
+
+	var newMatch = new Match({
+		email: email,
+		matchEmail: matchEmail,
+		response: response,
+	});
+
+	Match.createMatch(newMatch, function(err, match){
+		if (err) {
+			throw err;
+		}
+	});
 }
