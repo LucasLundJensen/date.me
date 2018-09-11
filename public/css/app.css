@@ -34,6 +34,10 @@ html, body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.visible {
+  display: block !important;
+}
+
 /* Login page */
 .login_title {
   text-align: center;
@@ -321,4 +325,8 @@ html, body {
 
 .custom-message-btn {
   background-image: linear-gradient(to right,#e052a0,#f15c41)!important;
+}
+
+#bioTextArea {
+  display: none;
 }

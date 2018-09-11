@@ -28,7 +28,8 @@
 		<div class="col-sm-6 offset-sm-2 user_meta_bio">
 			
 			<% if(fetchedUser._id.equals(user._id)) { %>
-			<i class="fas fa-wrench pull-right" onclick="edit_bio()"></i>
+			<i class="fas fa-wrench pull-right" id="editBio"></i>
+			<textarea name="bioTextArea" id="bioTextArea" cols="30" rows="10"></textarea>
 			<% } %>
 
 			<p id="user_bio"><%= fetchedUser.bio %></p>
@@ -45,5 +46,7 @@
 
 
 </div>
+
+<script src="../js/profile.js"></script>
 
 <% include ../partials/footer %>
