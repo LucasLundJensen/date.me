@@ -10,7 +10,7 @@
                     <li class="user_list_item" onclick="selectUser(this);">
                         <img class="avatar_image" src="/uploads/<%= users[i].profileImage %>">
                         <p class="avatar_username"><%= users[i].username %></p>
-						<p id="userID" style="visibility: hidden;"><%= users[i]._id %></p>
+						<p id="userID"><%= users[i]._id %></p>
                     </li>
 
                 <% } %>
@@ -52,7 +52,7 @@
 
     $('form').submit(function() {
 		socket.emit('chat message', {to: selectedUserId, from: thisUserId, fromName: username, msg: $('#m').val()});
-		$('#messages').append($('<li class="message">').text(username + ' skriver: ' + $('#m').val()));
+		$('#messages').append($('<li class="message">').text(username + ': ' + $('#m').val()));
         $('#m').val('');
 		return false;
     })
