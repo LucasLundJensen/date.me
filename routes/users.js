@@ -200,6 +200,20 @@ router.post('/user/declineMatch', function(req, res, next){
 	});
 })
 
+router.post('/user/acceptMatch', function(req, res, next){
+	Match.updateResponse(req.user.email, "accepted", function(err, feedback){
+		if (err) {
+			throw err;
+		}
+		console.log(feedback);
+
+		req.flash('success', 'Match has been accepted!');
+
+		res.location('/user/matches');
+		res.redirect('/user/matches');
+	});
+})
+
 //Matches Page
 router.get('/user/editStandards', ensureAuthenticated, function(req, res, next) {
 	res.render('authed/editStandards');
@@ -218,7 +232,7 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 					// Her fjerner vi de personer der er blevet declined
 					for (var i = 0; i < matches.length; i++) {
 						for (var x = 0; x < users.length; x++) {
-							if (users[x].email == matches[i].matchEmail && matches[i].response == "declined") {
+							if (users[x].email == matches[i].matchEmail && (matches[i].response == "declined" || matches[i].response == "accepted")) {
 								users.splice(x, 1);
 							}
 						}
