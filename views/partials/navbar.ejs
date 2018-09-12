@@ -1,4 +1,4 @@
-<div class="container-fluid <%if (locals.url.includes('/user/profile')) {%><%= 'nav_profile_color' %><%}%>">
+<div class="container-fluid <%if (locals.url.includes('/user/profile')) {%><%= 'nav_profile_color' %><%}%>" style="display: flex;">
   <div class="container">
     <div class="topbar-container">
       <div class="topbar">
@@ -11,14 +11,11 @@
         <a href="/" class="nav_item <% if(locals.url === '/'){%><%= 'active'%><%}%>">
           Home
         </a>
-        <a href="/user/settings/profile" class="nav_item <% if(locals.url.includes('/user/settings/')){%><%= 'active'%><%}%>">
-          Settings
-        </a>
         <a href="/user/matches" class="nav_item <% if(locals.url === '/user/matches'){%><%= 'active'%><%}%>">
           Matches
         </a>
-        <a href="/logout" class="nav_item <% if(locals.url === '/logout'){%><%= 'active'%><%}%>">
-          Logout
+		<a href="/user/settings/profile" class="nav_item <% if(locals.url.includes('/user/settings/')){%><%= 'active'%><%}%>">
+          Settings
         </a>
         <a href="/user/messages">
             <div class="notification-button">
@@ -33,6 +30,12 @@
       </div>
     </div>
   </div>
+  	<div class="logout-tooltip">
+		<span class="logout-tooltiptext">Logout</span>
+		<a href="/logout" class="<% if(locals.url === '/logout'){%><%= 'active'%><%}%>">
+		  <div class="logout-button"></div>
+		</a>
+	</div>
 </div>
 
 <script src="../js/navbar.js"></script>
