@@ -1,0 +1,48 @@
+.user_list {
+    list-style: none;
+    background-color: #0e2439;
+    height: 100%;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.user_list_item {
+    padding: 2rem;
+}
+
+.user_list_item:hover {
+    background-color: #15324f;
+}
+
+.avatar_image {
+    border-radius: 60px;
+    width: 2rem;
+    float: left;
+}
+
+.avatar_username {
+    margin-bottom: 0;
+    padding-left: 2.5rem;
+    color: white;
+    line-height: 2rem;
+}
+
+.chat_view {
+    background-color: #0e2439;
+}
+
+.chat_box {
+    color: white;
+    margin: 1rem;
+}
+
+#messages {
+    height: 11.5rem;
+    padding-left: 0;
+    margin: 0.5rem;
+}
+
+.message {
+    list-style: none;
+    text-align: start;
+}

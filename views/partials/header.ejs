@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- this only loads the profile.css file if the user is on the url /user/profile/ -->
 	<% if(locals.url === '/user/settings/profile' || locals.url === '/user/settings/security') {%><%- '<link rel="stylesheet" type="text/css" href="../css/settings.css">' %><%}%>
+	<% if(locals.url === '/user/messages') {%><%- '<link rel="stylesheet" type="text/css" href="../css/messages.css">' %><%}%>
 	<script src="../libs/jquery/jquery.js"></script>
 	<script src="../libs/bootstrap/js/bootstrap.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -1,0 +1,56 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 no-spacing">
+            <ul class="user_list">
+            <% for (var i = 0; i < users.length; i++) { %>
+                <% if(!users[i]._id.equals(user._id)) { %>
+
+                    <li class="user_list_item">
+                        <img class="avatar_image" src="/uploads/<%= users[i].profileImage %>">
+                        <p class="avatar_username"><%= users[i].username %></p>
+                    </li>
+
+                <% } %>
+            <% } %>
+            </ul>
+            
+        </div>
+        <div class="col-sm-9 no-spacing chat_view">
+            <div class="chat_box">
+                <ul id="messages"></ul>
+                <form action="" class="form-row align-items-center">
+                    <div class="col-sm-9 my-1">
+                        <input autofocus type="text" class="form-control mb-2 mr-sm-2" id="m">
+                    </div>
+                    <div class="col-sm-3 my-1">
+                        <button class="btn btn-primary mb-2">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/socket-io/socket.io.js"></script>
+<script>
+    var username = "<%= user.username %>";
+    var socket = io();
+
+    socket.emit('new user', username, function(data) {
+
+    })
+
+    $('form').submit(function(){
+        socket.emit('chat message', username + ": " + $('#m').val());
+        $('#m').val('');
+        return false;
+    })
+
+    socket.on('chat message', function(msg) {
+        $('#messages').append($('<li class="message">').text(msg));
+    })
+</script>
+<% include ../partials/footer %>

@@ -1,4 +1,8 @@
 var express = require('express');
+var app = express();
+var server = app.listen(3000, function(){
+	console.log('Server listening to port 3000...');
+});
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
@@ -8,9 +12,9 @@ var flash = require('connect-flash');
 var bcrypt = require('bcryptjs');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
+var io = require('socket.io').listen(server);
 
 var db = mongoose.connection;
-var app = express();
 
 var mainRoute = require('./routes/index');
 var usersRoute = require('./routes/users');
@@ -18,6 +22,7 @@ var usersRoute = require('./routes/users');
 app.use(bodyParser.urlencoded({extended: false}));
 app.set("view engine", "ejs");
 app.use(express.static('public'));
+app.use('/socket-io', express.static(__dirname + '/node_modules/socket.io-client/dist/'));
 
 //Handle Sessions
 app.use(session({
@@ -59,9 +64,20 @@ app.get('*', function(req, res, next) {
 	next();
 });
 
+//socket.io
+io.on('connection', function(socket) {
+	console.log('A user connected');
+	console.log(socket.id);
+	socket.on('disconnect', function() {
+		console.log('A user disconnected');
+	})
+	socket.on('chat message', function(msg) {
+		io.emit('chat message', msg);
+	})
+	socket.on('new user', function(data, callback) {
+		//idk
+	});
+})
+
 app.use('/', mainRoute);
 app.use('/', usersRoute);
-
-app.listen(3000, function(){
-    console.log("Listening to port 3000...");
-});
