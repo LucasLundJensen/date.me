@@ -5,9 +5,13 @@
     <a id="editStandardsButton" class="btn btn-success w-25" href="/user/editStandards">Edit standards</a>
 </div>
 
-<% if (match !== null) { %>
+<%- messages() %>
+
+<% if (match != null) { %>
 <div class="card">
-    <img src="uploads/<%= match.profileImage %>" alt="John" style="width:100%">
+    <a href="/user/profile/<%= match._id %>">
+      <img src="uploads/<%= match.profileImage %>" alt="John" style="width:100%">
+    </a>
     <h1><%= match.username %></h1>
     <p class="title">Gender: <%= match.gender %></p>
     <p class="title">City: <%= match.city %></p>

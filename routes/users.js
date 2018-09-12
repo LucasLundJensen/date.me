@@ -50,11 +50,12 @@ passport.use(new LocalStrategy({
 }));
 
 router.get('/user/profile/:userid', ensureAuthenticated, function(req, res){
+	var today = new Date().toISOString().slice(0, 10);
+
 	User.getUserById(req.params.userid, function(err, user) {
 		if (err) throw err;
 
 	res.render('authed/profile', {fetchedUser: user});
-
 	})
 });
 
@@ -223,13 +224,11 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 		if(err){
 			console.log(err);
 		} else {
-
 			Match.find({email: req.user.email}, function(err, matches){
 				if(err) {
 					console.log(err);
 				} else {
 					var match = null;
-
 					// Her fjerner vi de personer der er blevet declined
 					for (var i = 0; i < matches.length; i++) {
 						for (var x = 0; x < users.length; x++) {
@@ -239,8 +238,6 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 						}
 					}
 					match = Match.bestMatch(users, req.user)
-					var response = "";
-
 					if (match != null) {
 						if (matches.length > 0) {
 							var temp = 0;
@@ -251,23 +248,20 @@ router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 							}
 							if(temp == 0) {
 								Match.createMatchRecord(req.user.email, match.email);
-
 							}
 						} else {
 							console.log("loop else");
 							Match.createMatchRecord(req.user.email, match.email);
 						}
-
 						res.render('authed/matches', {match: match});
-
 					} else {
 						console.log("else");
-						if (match !== null) {
+						console.log(match);
+						if (match != null) {
 							Match.createMatchRecord(req.user.email, match.email);
 						}
 						res.render('authed/matches', {match: match});
 					}
-
 				} 
 			});
 		}
@@ -280,9 +274,7 @@ router.post('/user/editStandards', function(req, res, next){
 			throw err;
 		}
 		console.log(feedback);
-
 		req.flash('success', 'Your standards has been changed!')
-
 		res.location('/user/matches');
 		res.redirect('/user/matches');
 	});
