@@ -59,6 +59,17 @@ router.get('/user/profile/:userid', ensureAuthenticated, function(req, res){
 	})
 });
 
+//Messages Page
+router.get('/user/messages', ensureAuthenticated, function(req, res) {
+	User.find({}, function(err, users) {
+		if(err) {
+			throw err;
+		} else {
+			res.render('authed/messages', {users: users});
+		}
+	});
+})
+
 //Settings Page
 router.get('/user/settings', ensureAuthenticated, function(req, res, next) {
 	res.redirect('/user/settings/profile')
