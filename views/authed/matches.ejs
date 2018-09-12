@@ -13,8 +13,8 @@
     <p class="title">City: <%= match.city %></p>
     <p class="title">Age: <%= match.age %></p>
     <p>Bio: <%= match.bio %></p>
-    <form action="" method="get">
-        <p><button type="submit" class="btn btn-success">Contact</button></p>
+    <form action="user/acceptMatch" method="post">
+        <p><button type="submit" class="btn btn-success">Accept</button></p>
     </form>
     <form action="user/declineMatch" method="post">
         <p><button type="submit" class="btn btn-danger">Decline</button></p>
