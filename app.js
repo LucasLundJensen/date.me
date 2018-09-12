@@ -71,8 +71,9 @@ io.on('connection', function(socket) {
 	socket.on('disconnect', function() {
 		console.log('A user disconnected');
 	})
-	socket.on('chat message', function(msg) {
-		io.emit('chat message', msg);
+    socket.on('chat message', function (msg) {
+        console.log('message: ' + msg.msg + ', to: ' + msg.to + ', from: ' + msg.from + ' AKA: ' + msg.fromName);
+		io.emit(msg.to, msg.from, msg.fromName, msg.msg);
 	})
 	socket.on('new user', function(data, callback) {
 		//idk

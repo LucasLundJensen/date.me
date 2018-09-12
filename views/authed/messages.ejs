@@ -7,10 +7,10 @@
             <ul class="user_list">
             <% for (var i = 0; i < users.length; i++) { %>
                 <% if(!users[i]._id.equals(user._id)) { %>
-
-                    <li class="user_list_item">
+                    <li class="user_list_item" onclick="selectUser(this);">
                         <img class="avatar_image" src="/uploads/<%= users[i].profileImage %>">
                         <p class="avatar_username"><%= users[i].username %></p>
+						<p id="userID" style="visibility: hidden;"><%= users[i]._id %></p>
                     </li>
 
                 <% } %>
@@ -36,21 +36,31 @@
 
 <script src="/socket-io/socket.io.js"></script>
 <script>
+	var userIds = {};
     var username = "<%= user.username %>";
+	var thisUserId = "<%= user._id %>"
     var socket = io();
+	var users = "<% users %>";
+	var selectedUserId;
 
-    socket.emit('new user', username, function(data) {
+	function selectUser(item) {
+		$('.user_list_item').removeClass('active');
+		$(item).addClass('active');
+		$('#messages').empty();
+		selectedUserId = item.children[2].innerHTML;
+	}
 
-    })
-
-    $('form').submit(function(){
-        socket.emit('chat message', username + ": " + $('#m').val());
+    $('form').submit(function() {
+		socket.emit('chat message', {to: selectedUserId, from: thisUserId, fromName: username, msg: $('#m').val()});
+		$('#messages').append($('<li class="message">').text(username + ' skriver: ' + $('#m').val()));
         $('#m').val('');
-        return false;
+		return false;
     })
 
-    socket.on('chat message', function(msg) {
-        $('#messages').append($('<li class="message">').text(msg));
+    socket.on(thisUserId, function(from, fromName, msg) {
+		if (from == selectedUserId) {
+			$('#messages').append($('<li class="message">').text(fromName + ' skriver: ' + msg));
+		}
     })
 </script>
 <% include ../partials/footer %>
