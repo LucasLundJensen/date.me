@@ -15,6 +15,8 @@ var mongoose = require('mongoose');
 var io = require('socket.io').listen(server);
 
 var db = mongoose.connection;
+var Message = require('./models/message');
+
 
 var mainRoute = require('./routes/index');
 var usersRoute = require('./routes/users');
@@ -74,6 +76,15 @@ io.on('connection', function(socket) {
     socket.on('chat message', function (msg) {
         console.log('message: ' + msg.msg + ', to: ' + msg.to + ', from: ' + msg.from + ' AKA: ' + msg.fromName);
 		io.emit(msg.to, msg.from, msg.fromName, msg.msg);
+		Message.createMessageRecord(msg.from, msg.to, msg.fromName, msg.msg);
+	})
+	socket.on('get message', function (msg) {
+
+		Message.find({ from: msg.from, to: msg.to }, function(err, message){
+			io.emit(message);
+			console.log(message);
+		})
+
 	})
 	socket.on('new user', function(data, callback) {
 		//idk
