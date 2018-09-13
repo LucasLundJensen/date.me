@@ -16,6 +16,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 var User = require('../models/user');
 var Match = require('../models/matches')
+var Message = require('../models/message')
 
 passport.serializeUser(function(user, done) {
 	done(null, user.id);
@@ -65,7 +66,7 @@ router.get('/user/messages', ensureAuthenticated, function(req, res) {
 		if(err) {
 			throw err;
 		} else {
-			res.render('authed/messages', {users: users});
+			res.render('authed/messages', {users: users, message : Message});
 		}
 	});
 })
@@ -229,6 +230,7 @@ router.post('/user/acceptMatch', function(req, res, next){
 router.get('/user/editStandards', ensureAuthenticated, function(req, res, next) {
 	res.render('authed/editStandards');
 })
+
 
 router.get('/user/matches', ensureAuthenticated, function(req, res, next) {
 	User.find({ _id: { $ne : req.user._id}, gender: req.user.preferedSex }, function(err, users){
