@@ -45,7 +45,7 @@ module.exports.createMessageRecord = function(_idFrom, _idTo, _fromName, _messag
 	var newMessage = new Match({
 		from: from,
 		to: to,
-		fromName: _fromName,
+		fromName: fromName,
 		message: message,
 		messageDateTime: messageDateTime
 	});

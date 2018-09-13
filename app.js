@@ -80,9 +80,10 @@ io.on('connection', function(socket) {
 	})
 	socket.on('get message', function (msg) {
 
-		Message.find({ from: msg.from, to: msg.to }, function(err, message){
-			io.emit(message);
+		Message.find({ $or:[ {to: msg.to, from: msg.from}, {to: msg.from, from: msg.to} ] }, function(err, message){
+			if(err) throw err;
 			console.log(message);
+			io.emit('get message', message);
 		})
 
 	})
