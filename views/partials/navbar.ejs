@@ -11,29 +11,27 @@
         <a href="/" class="nav_item <% if(locals.url === '/'){%><%= 'active'%><%}%>">
           Home
         </a>
+        
         <a href="/user/matches" class="nav_item <% if(locals.url === '/user/matches'){%><%= 'active'%><%}%>">
           Matches
         </a>
 		<a href="/user/settings/profile" class="nav_item <% if(locals.url.includes('/user/settings/')){%><%= 'active'%><%}%>">
           Settings
         </a>
+        <a href="/logout" style="color: #f67280;" class="nav_item">
+          Logout
+        </a>
+        <a href="/user/messages">
+          <div class="notification-button"></div>
+        </a>
         <a href="/user/profile/<%= user._id %>" class="nav_item nav_avatar_image <% if(locals.url.includes('/user/profile')){%><%= 'active'%><%}%>">
           <img src="/uploads/<%= user.profileImage %>">
           <% var shortUsername = user.username.split(" "); %>
           <span id="username_tooltip"><%= shortUsername[0] %></span>
         </a>
-        <a href="/user/messages">
-          <div class="notification-button"></div>
-      </a>
       </div>
     </div>
   </div>
-  	<div class="logout-tooltip">
-		<span class="logout-tooltiptext">Logout</span>
-		<a href="/logout" class="<% if(locals.url === '/logout'){%><%= 'active'%><%}%>">
-		  <i class="fas fa-sign-out-alt logout-button"></i>
-		</a>
-	</div>
 </div>
 
 <script src="../js/navbar.js"></script>

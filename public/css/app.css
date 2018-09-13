@@ -138,7 +138,7 @@ html, body {
 	font-size: 115%;
     margin-right: 10%;
     flex-grow: 1;
-    line-height: 44px;
+    line-height: 42px;
 }
 
 #username_tooltip {
@@ -156,16 +156,6 @@ html, body {
     height: 32px;
 }
 
-.logout-button {
-    height: 42px;
-    width: 42px;
-    margin-top: 1.4rem;
-    margin-right: 30px;
-    opacity: 0.9;
-    color: #f67280;
-    font-size: 2rem;
-}
-
 /* Notifications */
 
 .notification-button {
@@ -173,6 +163,7 @@ html, body {
   position: relative;
   margin-top: 0.45rem;
   padding: 0.5rem;
+  margin-left: 0.7rem;
   background: #3498db;
   line-height: 1.2rem;
   border-radius: 0.2em;
