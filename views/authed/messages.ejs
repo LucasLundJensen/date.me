@@ -43,6 +43,8 @@
 	var users = "<% users %>";
 	var selectedUserId;
 
+	selectUser(document.getElementsByTagName('li')[0]);
+
 	function selectUser(item) {
 		$('#messages').empty();        
         $('.user_list_item').removeClass('active');
