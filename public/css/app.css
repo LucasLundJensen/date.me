@@ -333,6 +333,18 @@ html, body {
     margin-top: 4rem;
 }
 
+.indexMatch {
+    margin: 35%;
+    color: #f67280;
+    margin-top: 150px;
+}
+
+.indexNoMatch {
+    margin-top: 150px;
+    color: #f67280;
+    text-align: center;
+}
+
 .custom-message-btn {
   background-image: linear-gradient(to right,#e052a0,#f15c41)!important;
 }

@@ -11,5 +11,5 @@ var incremnet = function() {
 }
 
 $( document ).ready(function() {
-    incremnet();
+    //incremnet();
 })

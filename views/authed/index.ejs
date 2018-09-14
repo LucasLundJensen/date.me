@@ -3,5 +3,14 @@
 
 <%- messages() %>
 
+<% if (match != null) { %>
+	<div class="container">
+        <a class="indexMatch" href="/user/matches">You have a match, click here to see</a>
+    </div>
+<% } else { %>
+	<div class="container">
+        <h1 class="indexNoMatch">No matches yet. Please come back later.</h1>
+    </div>
+<% } %>
 
 <% include ../partials/header %>
