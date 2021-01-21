@@ -1,10 +1,5 @@
-var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-
-mongoose.connect('mongodb://localhost:27017/datingsite', { useNewUrlParser: true});
-
-var db = mongoose.connection;
-
+const mongoose = require("../mongoose");
 
 // User Schema
 var MessageSchema = mongoose.Schema({
